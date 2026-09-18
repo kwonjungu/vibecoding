@@ -605,3 +605,19 @@ details.hint { border-left-color: var(--accent); }
   border: 0;
   display: block;
 }
+
+/* AI 기본값 여섯 가지를 가운데로 모아 보이는 자리 (DESIGN.md §5) */
+.trait-call {
+  text-align: center;
+  background: var(--soft-cloud);
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  border-radius: var(--rounded-none);
+  padding: var(--sp-lg) var(--sp-md);
+  margin: var(--sp-lg) 0;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+@media (max-width: 599px) { .trait-call { font-size: 15px; } }

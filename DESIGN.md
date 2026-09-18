@@ -204,6 +204,7 @@
 | `.btn` | pill(`--rounded-lg`). `.btn-primary`는 `--ink` 배경 / 흰 글씨, `.btn-secondary`는 테두리만 |
 | `.brand-mark` | 브랜드 로고 자리. `<figure>` + `<img>`. 높이만 40px(넓은 워드마크는 32px)로 맞추고 **비율은 원본 그대로** 둔다. 늘이거나 자르지 않는다. 로고는 `assets/logo/` 에 내려받아 보관하고 핫링크하지 않는다 |
 | `.is-centered` | `.brand-mark` 와 `.lecture-actions` 에 붙이는 변형. 그 덩어리를 가운데로 둔다. 로고와 바로 아래 버튼을 한 쌍으로 보여 줄 때 쓴다 |
+| `.trait-call` | 2칸에서 AI 기본값 여섯 가지를 한데 모아 보이는 자리. 페이지에서 **유일하게 가운데 정렬하는 글**이다. 비판하는 대상을 그 모습 그대로 보여 주는 것이라 예외로 둔다 |
 | `.video-embed` | 영상 자리. `<iframe>` 을 감싸 16 대 9 비율을 지킨다. `title` 속성으로 무엇인지 밝히고 `loading="lazy"` 를 붙인다. 자동 재생은 쓰지 않는다 |
 | `.guide-shot` | `<figure>`. 캡처 자리. 없을 땐 비워 두되 `figcaption`으로 "연수 전 촬영" 표시 |
 | `table` | 열 머리(`thead th`)만 12px 대문자 kicker + 강조색 2px 밑줄. 행 머리(`tbody th`)는 본문 크기 굵은 글씨에 다른 칸과 같은 1px 밑줄. `th` 전체에 머리 스타일을 걸면 행 머리까지 작아지고 줄마다 굵은 색선이 생긴다 |

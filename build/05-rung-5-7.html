@@ -23,6 +23,57 @@
         <li>Firebase 설정 팝업이 뜨면 약관에 동의합니다. 이때 프로젝트가 자동으로 만들어집니다.</li>
         <li>배포하고 링크를 공유합니다.</li>
       </ol>
+
+      <h3>서버 연결하는 법</h3>
+      <p>여기까지 오면 화면은 뜨는데 점수가 안 올라갑니다. 콘솔에서 익명 로그인을 켜야 합니다. AI가 대신 못 누르는 스위치 하나입니다.</p>
+      <div class="table-scroll">
+        <table>
+            <caption>익명 로그인을 켜는 네 단계</caption>
+            <thead>
+              <tr><th scope="col">순서</th><th scope="col">캡처</th><th scope="col">보는 것</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>①</td>
+                <td>Firebase 콘솔 홈</td>
+                <td>프로젝트 목록에 Default Gemini Project가 이미 있습니다. AI Studio Build가 만들어 둔 것이므로 새로 만들 필요가 없습니다.</td>
+              </tr>
+              <tr>
+                <td>②</td>
+                <td>왼쪽 메뉴</td>
+                <td>제품 카테고리를 펼치고 보안을 고른 다음 Authentication을 누릅니다.</td>
+              </tr>
+              <tr>
+                <td>③</td>
+                <td>로그인 방법 탭</td>
+                <td>제공업체 목록에서 익명이 사용 설정됨으로 바뀌어 있어야 합니다.</td>
+              </tr>
+              <tr>
+                <td>④</td>
+                <td>사용자 탭</td>
+                <td>접속자가 익명으로 쌓입니다. 학생 한 명이 들어올 때마다 한 줄씩 늘어나면 성공입니다.</td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+
+      <figure class="guide-shot">
+        <img src="assets/shot/rung5-firebase-01-console.png" alt="Firebase 콘솔 홈 화면. 프로젝트 목록에 Default Gemini Project가 이미 있음">
+        <figcaption>① Firebase 콘솔 홈입니다. Default Gemini Project가 이미 있으므로 새로 만들지 않습니다.</figcaption>
+      </figure>
+      <figure class="guide-shot">
+        <img src="assets/shot/rung5-firebase-02-menu-auth.png" alt="왼쪽 메뉴에서 제품 카테고리, 보안, Authentication을 차례로 선택하는 화면">
+        <figcaption>② 왼쪽 메뉴에서 제품 카테고리, 보안, Authentication 순으로 들어갑니다.</figcaption>
+      </figure>
+      <figure class="guide-shot">
+        <img src="assets/shot/rung5-firebase-03-providers.png" alt="Authentication 로그인 방법 탭. 제공업체 목록에서 익명이 사용 설정됨으로 표시된 화면">
+        <figcaption>③ 로그인 방법 탭입니다. 익명이 사용 설정됨이면 문이 열린 것입니다.</figcaption>
+      </figure>
+      <figure class="guide-shot">
+        <img src="assets/shot/rung5-firebase-04-users.png" alt="Authentication 사용자 탭. 익명으로 표시된 접속자 두 명이 목록에 쌓인 화면">
+        <figcaption>④ 사용자 탭입니다. 한 명이 들어올 때마다 한 줄씩 늘어나면 성공입니다.</figcaption>
+      </figure>
+
     </div>
 
     <div class="detail-block" data-block="prompt">
@@ -52,55 +103,8 @@
         <summary>auth/admin-restricted-operation 이라는 빨간 글씨가 뜹니다</summary>
         <p><strong>증상</strong> 게임은 열리는데 점수를 올리는 순간 화면이 멈추고 <code>auth/admin-restricted-operation</code> 이 뜹니다.</p>
         <p><strong>원인</strong> Firebase 콘솔에서 익명 로그인을 아직 사용 설정하지 않았습니다.</p>
-        <p><strong>해결</strong> 콘솔에서 익명을 켭니다. 아래 네 장면을 순서대로 따라갑니다.</p>
+        <p><strong>해결</strong> 위 서버 연결 네 단계를 건너뛰었습니다. 그대로 따라 하면 풀립니다.</p>
 
-        <div class="table-scroll">
-          <table>
-            <caption>익명 로그인을 켜는 네 단계</caption>
-            <thead>
-              <tr><th scope="col">순서</th><th scope="col">캡처</th><th scope="col">보는 것</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>①</td>
-                <td>Firebase 콘솔 홈</td>
-                <td>프로젝트 목록에 Default Gemini Project가 이미 있습니다. AI Studio Build가 만들어 둔 것이므로 새로 만들 필요가 없습니다.</td>
-              </tr>
-              <tr>
-                <td>②</td>
-                <td>왼쪽 메뉴</td>
-                <td>제품 카테고리를 펼치고 보안을 고른 다음 Authentication을 누릅니다.</td>
-              </tr>
-              <tr>
-                <td>③</td>
-                <td>로그인 방법 탭</td>
-                <td>제공업체 목록에서 익명이 사용 설정됨으로 바뀌어 있어야 합니다.</td>
-              </tr>
-              <tr>
-                <td>④</td>
-                <td>사용자 탭</td>
-                <td>접속자가 익명으로 쌓입니다. 학생 한 명이 들어올 때마다 한 줄씩 늘어나면 성공입니다.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <figure class="guide-shot">
-          <img src="assets/shot/rung5-firebase-01-console.png" alt="Firebase 콘솔 홈 화면. 프로젝트 목록에 Default Gemini Project가 이미 있음">
-          <figcaption>① Firebase 콘솔 홈입니다. Default Gemini Project가 이미 있으므로 새로 만들지 않습니다.</figcaption>
-        </figure>
-        <figure class="guide-shot">
-          <img src="assets/shot/rung5-firebase-02-menu-auth.png" alt="왼쪽 메뉴에서 제품 카테고리, 보안, Authentication을 차례로 선택하는 화면">
-          <figcaption>② 왼쪽 메뉴에서 제품 카테고리, 보안, Authentication 순으로 들어갑니다.</figcaption>
-        </figure>
-        <figure class="guide-shot">
-          <img src="assets/shot/rung5-firebase-03-providers.png" alt="Authentication 로그인 방법 탭. 제공업체 목록에서 익명이 사용 설정됨으로 표시된 화면">
-          <figcaption>③ 로그인 방법 탭입니다. 익명이 사용 설정됨이면 문이 열린 것입니다.</figcaption>
-        </figure>
-        <figure class="guide-shot">
-          <img src="assets/shot/rung5-firebase-04-users.png" alt="Authentication 사용자 탭. 익명으로 표시된 접속자 두 명이 목록에 쌓인 화면">
-          <figcaption>④ 사용자 탭입니다. 한 명이 들어올 때마다 한 줄씩 늘어나면 성공입니다.</figcaption>
-        </figure>
       </details>
 
       <details class="trouble">

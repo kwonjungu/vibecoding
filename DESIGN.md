@@ -82,7 +82,8 @@
 | key-text | 18px / 1.5 | ui | `.key-item` 설명. 전자칠판에서 읽히는 최소 크기 |
 | key-label | 14px, 700 | ui | 알약 배지. 강조색 바탕에 흰 글씨 |
 | kicker | 12px / 1.2, letter-spacing .12em, 대문자 | ui | `SECTION 01` |
-| caption | 14px / 1.5 | ui | 캡션·각주 |
+| figcaption | 16px / 1.6 | ui | 절차 캡처의 설명. 따라 하며 읽는 글이라 본문에 준한다 |
+| caption | 14px / 1.5 | ui | 각주·주의사항 |
 
 ### 간격 · 라운드 · 레이아웃
 

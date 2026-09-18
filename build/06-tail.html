@@ -9,11 +9,11 @@
     <div class="key-grid">
       <div class="key-item">
         <p class="key-label">API 키</p>
-        <p class="key-text">코드에 적지 않고 화면에 띄우지 않으며 캡처해서 공유하지 않습니다. 키는 Apps Script의 스크립트 속성에만 둡니다. 새어 나갔다면 그 키를 삭제하고 새로 만듭니다.</p>
+        <p class="key-text">코드에 적지 않고 화면에 띄우지 않으며 캡처해서 공유하지 않습니다. 키는 서버 쪽 비밀값으로만 둡니다. 새어 나갔다면 그 키를 삭제하고 새로 만듭니다.</p>
       </div>
       <div class="key-item">
         <p class="key-label">개인정보</p>
-        <p class="key-text">학생 이름과 얼굴 사진은 공개 저장소에 올리지 않습니다. 학생은 회원가입 없이 학급 코드와 번호로 들어옵니다. 시트에는 번호와 별명, 점수만 남깁니다.</p>
+        <p class="key-text">학생 이름과 얼굴 사진은 공개 저장소에 올리지 않습니다. 학생은 회원가입 없이 학급 코드와 번호로 들어옵니다. 서버에는 번호와 별명, 점수만 남깁니다.</p>
       </div>
       <div class="key-item">
         <p class="key-label">저작권</p>
@@ -31,7 +31,7 @@
     <li>코드와 캡처 어디에도 API 키가 적혀 있지 않습니다.</li>
     <li>학생 이름과 얼굴 사진이 저장소에 올라가 있지 않습니다.</li>
     <li>교과서 지문이나 삽화가 든 앱은 주소를 내지 않았습니다.</li>
-    <li>시트 학급 탭에서 코드를 적은 칸을 찾아 두었습니다.</li>
+    <li>학급 코드를 수업 뒤에 어디서 바꾸는지 확인해 두었습니다.</li>
   </ul>
 </section>
 
@@ -55,7 +55,7 @@
           <th scope="row">API</th>
           <td>프로그램끼리 주고받는 정해진 요청과 응답 양식입니다.</td>
           <td>주문서</td>
-          <td>5칸의 join과 save</td>
+          <td>5칸에서 점수를 Firestore에 저장하고 읽어 오는 자리</td>
         </tr>
         <tr>
           <th scope="row">프론트엔드</th>
@@ -79,13 +79,13 @@
           <th scope="row">토큰</th>
           <td>AI가 글을 세는 단위입니다. 한글 한두 자가 토큰 하나쯤이고 요금과 한도의 기준이 됩니다.</td>
           <td>주방이 재료를 세는 단위</td>
-          <td>8칸의 무료 한도</td>
+          <td>7칸의 무료 한도</td>
         </tr>
         <tr>
           <th scope="row">에이전트</th>
           <td>목표를 주면 스스로 여러 단계를 밟아 끝까지 일하는 AI입니다.</td>
           <td>장보기부터 설거지까지 알아서 하는 직원</td>
-          <td>6칸의 AI Studio Build</td>
+          <td>5칸의 AI Studio Build</td>
         </tr>
         <tr>
           <th scope="row">DESIGN.md</th>
@@ -121,17 +121,12 @@
         <tr>
           <th scope="row">Firebase Spark(무료)</th>
           <td>결제 수단 없이 Firestore와 Hosting, Authentication을 씁니다. Firestore는 하루에 읽기 50,000회, 쓰기 20,000회, 삭제 20,000회까지 됩니다. 저장 공간은 1GB입니다.</td>
-          <td>6칸과 7칸이 이 범위 안에서 돕니다.</td>
+          <td>5칸과 6칸이 이 범위 안에서 돕니다.</td>
         </tr>
         <tr>
           <th scope="row">Firebase Cloud Storage</th>
           <td>파일 업로드를 맡는 자리입니다. 2026년 2월 3일부터 버킷 생성에 결제 계정이 필요합니다.</td>
-          <td>이 페이지에서는 쓰지 않습니다. 7칸의 사진은 줄여서 Firestore에 문자열로 넣습니다.</td>
-        </tr>
-        <tr>
-          <th scope="row">Google Apps Script</th>
-          <td>구글 시트에 딸린 프로그램입니다. 무료입니다.</td>
-          <td>5칸의 결과 모으기가 여기서 돕니다.</td>
+          <td>이 페이지에서는 쓰지 않습니다. 6칸의 사진은 줄여서 Firestore에 문자열로 넣습니다.</td>
         </tr>
         <tr>
           <th scope="row">GitHub Pages</th>
@@ -142,7 +137,7 @@
     </table>
   </div>
 
-  <p>숫자가 커 보이지만 한 학급이 한 수업에서 쓰는 양은 이 표의 가장 작은 칸에도 들어갑니다. 실제 계산은 <a href="#rung-8">8칸 앱이 AI를 부르게</a>에 적어 두었습니다.</p>
+  <p>숫자가 커 보이지만 한 학급이 한 수업에서 쓰는 양은 이 표의 가장 작은 칸에도 들어갑니다. 실제 계산은 <a href="#rung-7">7칸 앱이 AI를 부르게</a>에 적어 두었습니다.</p>
 </section>
 
 <section class="pane" id="beyond">

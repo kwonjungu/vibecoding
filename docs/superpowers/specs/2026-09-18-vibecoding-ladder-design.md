@@ -35,14 +35,13 @@
 | 0 | 준비물 챙기기 | GitHub · Google AI Studio · Firebase | 계정 3개 |
 | 1 | 더 나은 바이브코딩을 위한 배경지식 | — (개념 칸) | 시작하기 전의 판단 기준 |
 | 2 | 웹페이지 디자인 — 같은 내용, 다른 인상 | Gemini Canvas · getdesign.md | 디자인이 입혀진 내 활동지 |
-| 3 | 재료 만들어 붙이기 | AI Studio + Gemini 이미지 생성 | 그림이 들어간 `assets` 폴더 |
-| 4 | 주소 만들기 | GitHub Pages | QR 찍으면 열리는 내 앱 |
-| 5 | 결과 모으기 (쉬운 길) | 구글 시트 + Apps Script | 학생 결과가 시트에 쌓임 |
-| 6 | 서버 체험 — 게임과 기록표 | AI Studio Build + Firebase | 링크만 공유하면 30명이 같은 순위표 |
-| 7 | 서버 활용 — 날짜별 사진 캘린더 | AI Studio Build + Firestore | 하루 한 장, 규격이 고정된 학급 캘린더 |
-| 8 | 앱이 AI를 부르게 | Gemini API 키 | 힌트 버튼 (키는 서버에만) |
+| 3 | 재료 만들어 붙이기 | AI Studio · 이미지 생성 | 그림이 들어간 `assets` 폴더 |
+| 4 | 주소 만들기 — 두 갈래를 나란히 | GitHub Pages · ai.studio | QR 찍으면 열리는 내 앱 |
+| 5 | 서버 체험 — 게임과 기록표 | AI Studio Build + Firebase | 링크만 공유하면 30명이 같은 순위표 |
+| 6 | 서버 활용 — 날짜별 사진 캘린더 | AI Studio Build + Firestore | 하루 한 장, 규격이 고정된 학급 캘린더 |
+| 7 | 앱이 AI를 부르게 | AI Studio Build | 힌트 버튼 (키는 서버에만) |
 
-식당 비유(홀=프론트 · 주방=백엔드 · 주문서=API · 건물=호스팅)는 기존 슬라이드에서 그대로 승계하며, 2~4칸이 홀과 건물, 5~8칸이 주방과 주문서에 대응한다.
+식당 비유(홀=프론트 · 주방=백엔드 · 주문서=API · 건물=호스팅)는 기존 슬라이드에서 그대로 승계하며, 2~4칸이 홀과 건물, 5~7칸이 주방과 주문서에 대응한다.
 
 ### 칸별 내용
 
@@ -223,7 +222,8 @@ demo/               실습용 예시 파일
 - DESIGN.md는 마크다운 한 장에 디자인 시스템을 담아 AI 에이전트에게 넘기는 포맷이다. getdesign.md와 GitHub `voltagent/awesome-design-md`에 70여 개 브랜드 명세가 MIT로 공개되어 있다.
 - AI Studio Build는 대화만으로 Firebase 연결·익명 인증·`firestore.rules` 생성·실시간 리스너까지 붙인다(2026-09 실측). 다만 **콘솔에서 사람이 눌러야 하는 스위치**가 남는다: Authentication의 익명 사용 설정, 그리고 규칙의 서버 배포.
 - 배포된 Build 앱은 **링크 공유만으로 동시 접속**이 된다.
-- Apps Script `fetch`는 `text/plain` POST + `redirect: "follow"`여야 CORS 오류가 나지 않는다.
+- AI Studio Build는 Gemini를 쓰는 앱을 만들 때 **API 키를 서버 쪽 비밀값으로 자동 설정**한다. 호출은 서버가 가로채 대신 보내므로 키가 클라이언트 코드에 들어가지 않는다. 다만 앱을 ZIP으로 내려받아 다른 곳에 올리면 그 환경에 `GEMINI_API_KEY` 를 직접 넣어야 한다.
+- AI Studio의 Starter Tier는 **결제 수단 없이** 앱을 배포할 수 있게 한다(Cloud Run + Firestore). 여기에 더해 계정마다 무료 Cloud Run 배포가 두 번 주어진다. 그 범위를 넘으면 사용량만큼 요금이 붙는다. 오래 열어 둘 앱은 GitHub Pages가 안전하다.
 
 ## 11. 범위 밖
 
@@ -233,6 +233,7 @@ demo/               실습용 예시 파일
 - 라이브 현황판(연수생 제출 → 강사 화면 집계) — 읽기 전용 정적 페이지 결정에 따라 제외
 - 진도 체크·복사 버튼 등 상태를 저장하는 기능 — 같은 사유로 제외
 - 손그림·활동지 사진으로 앱 만들기 — 재료를 전부 AI로 생성하므로 제외
+- **구글 시트 + Apps Script — 2026-09-18 제거.** 서버를 이미 Firebase로 붙이는데 시트 백엔드가 따로 있어 이물감이 컸다. 백엔드 이야기를 Firebase 하나로 합쳤다. 이에 따라 옛 5칸이 사라지고 9칸이 8칸이 되었으며, API 키 보관처도 Apps Script 스크립트 속성에서 AI Studio Build의 서버 쪽 비밀값으로 바뀌었다.
 - sfxr, Squoosh — 같은 사유로 제외. 효과음은 코드가 생성한다.
 
 ## 12. 확인 필요

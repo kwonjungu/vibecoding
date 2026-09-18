@@ -20,8 +20,8 @@ PARTS = [
     '01-hero-map.html',
     '02-rung-0-1.html',
     '03-rung-2-3.html',
-    '04-rung-4-5.html',
-    '05-rung-6-8.html',
+    '04-rung-4.html',
+    '05-rung-5-7.html',
     '06-tail.html',
 ]
 
@@ -31,7 +31,7 @@ HEAD = u'''<!DOCTYPE html>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>바이브코딩 사다리 — 코딩 몰라도 앱을 만들 수 있을까요?</title>
-<meta name="description" content="브라우저만으로, 무료로, 쉬운 것부터 어려운 것까지. 초등 교사를 위한 바이브코딩 아홉 칸 실습 사다리." />
+<meta name="description" content="브라우저만으로, 무료로, 쉬운 것부터 어려운 것까지. 초등 교사를 위한 바이브코딩 여덟 칸 실습 사다리." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet" />

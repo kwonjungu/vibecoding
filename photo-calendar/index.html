@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>우리 반 하루 한 장 사진 캘린더 — 바이브코딩 7칸</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    
+    <!-- App Header -->
+    <header>
+      <div class="header-top">
+        <div class="title-area">
+          <h1>
+            <span>📷 우리 반 하루 한 장 사진 캘린더</span>
+            <span class="badge">STEP 07</span>
+          </h1>
+          <p class="title-desc">하루 한 장, 512px 규격 고정 · Cloud Storage 없이 Firestore 문자열 저장</p>
+        </div>
+        <div class="server-status-bar">
+          <button id="statusChip" class="status-chip local-mode" title="서버 연결 상태 확인 및 설정">
+            <span id="statusDot" class="status-dot"></span>
+            <span id="statusText">🟡 로컬 모드 (서버 미설정)</span>
+          </button>
+          <button id="btnOpenSettings" class="btn-icon" title="Firebase 서버 설정">
+            ⚙️ <span>서버 설정</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Month Navigation -->
+      <div class="nav-row">
+        <h2 id="currentMonth" class="current-month">2026년 9월</h2>
+        <div class="nav-buttons">
+          <button id="prevMonthBtn" class="btn-nav">◀ 이전 달</button>
+          <button id="todayBtn" class="btn-nav btn-today">오늘</button>
+          <button id="nextMonthBtn" class="btn-nav">다음 달 ▶</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Privacy Banner (조건 4: 얼굴 사진 금지 안내 상시 표시) -->
+    <div class="privacy-banner">
+      <span>⚠️</span>
+      <div>
+        <strong>초상권 및 개인정보 보호 안내:</strong>
+        링크를 가진 누구나 볼 수 있는 학급 공유 앱입니다. 학생 얼굴이나 개인정보가 나온 사진은 올리지 않습니다.
+      </div>
+    </div>
+
+    <!-- Calendar Card -->
+    <main class="calendar-card">
+      <div class="weekdays-grid">
+        <div>일</div>
+        <div>월</div>
+        <div>화</div>
+        <div>수</div>
+        <div>목</div>
+        <div>금</div>
+        <div>토</div>
+      </div>
+      <div id="daysGrid" class="days-grid">
+        <!-- Javascript dynamically fills 7xN cells -->
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Photo Detail & Upload Modal -->
+  <div id="photoModal" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="modalTitle" class="modal-title">📅 날짜 사진</h3>
+        <button id="btnCloseModal" class="btn-close" aria-label="닫기">&times;</button>
+      </div>
+
+      <!-- 조건 4: 업로드 칸 위에 항상 보이게 띄우는 안내 문구 -->
+      <div class="modal-alert">
+        <strong>⚠️ 주의:</strong> 학생 얼굴이 나온 사진은 절대 올리지 마세요. (풍경, 급식, 활동 결과물, 그림 등 활용 권장)
+      </div>
+
+      <!-- 규격 안내 -->
+      <div class="spec-info">
+        <div><strong>💡 자동 규격 손질 (브라우저 Canvas):</strong></div>
+        <div>• 512×512 픽셀 중앙 정사각형 리사이징</div>
+        <div>• JPEG 압축 (품질 0.7, 약 60~110KB 확보)</div>
+      </div>
+
+      <!-- 기존 사진 미리보기 영역 -->
+      <div id="previewContainer" class="photo-preview-area" style="display: none;">
+        <div class="preview-square">
+          <img id="previewImg" src="" alt="선택한 날짜 사진">
+        </div>
+        <span id="photoMetaTag" class="photo-meta-tag"></span>
+      </div>
+
+      <!-- 업로드 드롭존 (사진이 없을 때 또는 교체 시) -->
+      <div id="uploadDropzone" class="dropzone">
+        <div class="dropzone-icon">📷</div>
+        <div class="dropzone-text">사진을 클릭하여 선택하거나 여기로 끌어다 놓으세요</div>
+        <div class="dropzone-sub">JPG, PNG 등 모든 이미지 지원 (자동 512px JPEG 변환)</div>
+        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+      </div>
+
+      <!-- 업로드 진행/상태 알림 -->
+      <div id="uploadProgress" style="display: none; text-align: center; font-weight: 600; color: var(--rung-7); margin: 12px 0;"></div>
+
+      <!-- 모달 액션 버튼 -->
+      <div class="modal-actions">
+        <button id="btnReplacePhoto" class="btn btn-secondary" style="display: none;">🔄 새 사진으로 교체</button>
+        <button id="btnDeletePhoto" class="btn btn-danger" style="display: none;">🗑️ 사진 삭제</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Server Settings Modal -->
+  <div id="settingsModal" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">⚙️ Firebase 서버 연결</h3>
+        <button id="btnCloseSettings" class="btn-close" aria-label="닫기">&times;</button>
+      </div>
+
+      <div class="settings-help">
+        <p><strong>연수/실습 안내:</strong></p>
+        <p>1. 6칸에서 생성된 Firebase 프로젝트의 <code>firebaseConfig</code>를 아래에 붙여넣으면 즉시 실시간 서버가 연결됩니다.</p>
+        <p>2. 또는 <code>photo-calendar/firebase-config.js</code> 파일에 직접 적어두셔도 됩니다.</p>
+        <p style="margin-top: 6px; color: var(--rung-7); font-weight: 600;" id="currentConfigSource">현재: 로컬 모드</p>
+      </div>
+
+      <div class="form-group">
+        <label for="firebaseConfigInput">Firebase Config 붙여넣기 (JSON 또는 JS 객체):</label>
+        <textarea id="firebaseConfigInput" class="form-textarea" placeholder='{
+  "apiKey": "AIzaSy...",
+  "authDomain": "my-project.firebaseapp.com",
+  "projectId": "my-project",
+  "storageBucket": "my-project.appspot.com",
+  "messagingSenderId": "...",
+  "appId": "..."
+}'></textarea>
+      </div>
+
+      <div class="modal-actions">
+        <button id="btnResetConfig" class="btn btn-secondary">로컬 모드로 복구</button>
+        <button id="btnSaveConfig" class="btn btn-primary">저장 및 연결</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

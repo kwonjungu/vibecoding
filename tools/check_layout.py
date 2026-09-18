@@ -16,7 +16,7 @@ CSS = os.path.join(ROOT, 'styles.css')
 
 SECTION_ORDER = (
     ['hero', 'ladder-map']
-    + ['rung-%d' % i for i in range(9)]
+    + ['rung-%d' % i for i in range(8)]
     + ['safety', 'glossary', 'limits', 'beyond']
 )
 BLOCKS_PRACTICE = ['why', 'how', 'prompt', 'check', 'trouble']
@@ -72,9 +72,9 @@ def main():
             bad.append('rung-%d' % n)
         rungs[n] = m.start()
     check('L02', '모든 칸에 id="rung-N" 과 data-rung="N" 이 있다',
-          len(rungs) == 9 and not bad,
+          len(rungs) == 8 and not bad,
           'data-rung 누락: %s' % ', '.join(bad) if bad else
-          ('칸 %d개만 발견' % len(rungs) if len(rungs) != 9 else ''))
+          ('칸 %d개만 발견' % len(rungs) if len(rungs) != 8 else ''))
 
     # 칸 본문 잘라두기
     # 각 칸의 본문은 '다음 <section' 직전까지다. 마지막 칸이 꼬리 섹션을
@@ -124,8 +124,8 @@ def main():
     # L08 사다리 지도
     m = re.search(r'<section[^>]*id="ladder-map".*?</section>', html, re.S)
     links = re.findall(r'href="#rung-(\d)"', m.group(0)) if m else []
-    check('L08', '사다리 지도에 9칸 링크(#rung-0~8)가 모두 있다',
-          sorted(set(links)) == [str(i) for i in range(9)],
+    check('L08', '사다리 지도에 8칸 링크(#rung-0~7)가 모두 있다',
+          sorted(set(links)) == [str(i) for i in range(8)],
           '발견: %s' % sorted(set(links)))
 
     # L09 제목 위계
@@ -182,7 +182,7 @@ def main():
 
     # L16 칸 강조색
     miss = []
-    for i in range(9):
+    for i in range(8):
         if '--rung-%d:' % i not in css or '--rung-%d-soft:' % i not in css:
             miss.append('--rung-%d' % i)
         if 'section[data-rung="%d"]' % i not in css:

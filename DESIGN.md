@@ -14,7 +14,7 @@
 - **무채색이 바탕, 칸당 강조색은 하나.** 본문·배경·선은 검정·흰색·소프트클라우드를 쓴다. 칸마다 강조색 **한 개**를 배정해 번호·키커·미디어 바탕·강조 띠에만 쓴다. 색을 그라데이션으로 섞거나 한 칸에 두 가지 색을 쓰지 않는다.
 - **색은 위치를 알려 주는 장치다.** 0·1칸은 무채에 가깝고, 2~4칸(홀·건물)은 따뜻한 계열, 5~8칸(주방·주문서)은 차가운 계열로 간다. 사다리를 오를수록 색이 옮겨 간다.
 - **평평하게.** 카드에 그림자와 라운드를 주지 않는다. 사진이 곧 카드다.
-- **번호가 곧 표지판.** 색보다 큰 숫자(`00`~`08`)가 먼저 읽힌다. 색은 거드는 신호일 뿐이다.
+- **번호가 곧 표지판.** 색보다 큰 숫자(`00`~`07`)가 먼저 읽힌다. 색은 거드는 신호일 뿐이다.
 - **이 페이지는 2칸에서 "AI 기본값 디자인"을 비판한다.** 따라서 자기 자신이 보라색 그라데이션·둥근 카드·짙은 그림자·제목 이모지를 쓰면 안 된다. 이건 취향이 아니라 **자기모순 방지**다. §8에서 금지 규칙으로 못 박는다.
 
 ---
@@ -51,10 +51,9 @@
 | 2 웹페이지 디자인 | `--rung-2` | `#b3431f` | `#fbeee8` | 테라코타 |
 | 3 재료 | `--rung-3` | `#985908` | `#fbf1e2` | 앰버 |
 | 4 주소 만들기 | `--rung-4` | `#0a7281` | `#e6f2f3` | 틸 |
-| 5 결과 모으기 | `--rung-5` | `#1f6f43` | `#e9f3ed` | 그린 |
-| 6 서버 체험 | `--rung-6` | `#1151ff` | `#e8eeff` | 블루 |
-| 7 사진 캘린더 | `--rung-7` | `#3d3a8c` | `#ecebf7` | 인디고 |
-| 8 AI 부르기 | `--rung-8` | `#8a1c4b` | `#f8e9f0` | 플럼 |
+| 5 서버 체험 | `--rung-5` | `#1151ff` | `#e8eeff` | 블루 |
+| 6 사진 캘린더 | `--rung-6` | `#3d3a8c` | `#ecebf7` | 인디고 |
+| 7 AI 부르기 | `--rung-7` | `#8a1c4b` | `#f8e9f0` | 플럼 |
 
 꼬리 네 섹션도 같은 방식으로 `--pane-safety` `#8a1c4b` · `--pane-glossary` `#39393b` · `--pane-limits` `#0a7281` · `--pane-beyond` `#39393b` 를 갖는다.
 
@@ -103,20 +102,19 @@
 
 ```
 1  section.hero            질문형 헤드라인
-2  section.ladder-map      9칸 지도 (탭 역할)
+2  section.ladder-map      8칸 지도 (탭 역할)
 3  section.lecture#rung-0  준비물 챙기기
 4  section.lecture#rung-1  배경지식
 5  section.lecture#rung-2  웹페이지 디자인
 6  section.lecture#rung-3  재료 만들어 붙이기
 7  section.lecture#rung-4  주소 만들기
-8  section.lecture#rung-5  결과 모으기
-9  section.lecture#rung-6  서버 체험
-10 section.lecture#rung-7  사진 캘린더
-11 section.lecture#rung-8  앱이 AI를 부르게
-12 section.safety          안전 한 장
-13 section.glossary        용어 한 장
-14 section.limits          무료 한도 표
-15 section.beyond          더 멀리 가려면
+8  section.lecture#rung-5  서버 체험
+9  section.lecture#rung-6  사진 캘린더
+10 section.lecture#rung-7  앱이 AI를 부르게
+11 section.safety          안전 한 장
+12 section.glossary        용어 한 장
+13 section.limits          무료 한도 표
+14 section.beyond          더 멀리 가려면
 ```
 
 - 칸 섹션은 `id="rung-N"`과 `data-rung="N"`을 함께 가진다 (**L02**).
@@ -174,7 +172,7 @@
 
 | 클래스 | 규격 |
 |---|---|
-| `.ladder-map` | 9칸 그리드. 데스크톱 3열 × 3행, 768px 이하 1열. 각 항목은 `번호 · 제목 · 도구 · 남는 것` 4줄, `href="#rung-N"` (**L08**) |
+| `.ladder-map` | 8칸 그리드. 데스크톱 4열 × 2행, 768px 이하 1열. 각 항목은 `번호 · 제목 · 도구 · 남는 것` 4줄, `href="#rung-N"` (**L08**) |
 | `.note-card` | 배경 `--soft-cloud`, 라운드 0, 그림자 없음, 패딩 `--sp-xl` |
 | `.guide-key` / `.key-grid` | 3열(768px 이하 1열). 각 `.key-item`은 `.key-label`(kicker) + `.key-text` |
 | `.prompt-box` | `--soft-cloud` 배경, 좌측 4px `--ink` 띠, `pre` 유지, 사용자가 드래그해 복사 |

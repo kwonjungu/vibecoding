@@ -220,16 +220,18 @@ def main():
         return body is not None and ('margin-left: auto' in body or 'margin: 0 auto' in body)
 
     bad = []
-    for sel in ['.lecture-detail', '.ladder-note']:
+    for sel in ['.lecture-detail', '.ladder-note', '.key-lead', '.key-foot']:
         if not centered(rule_body(sel)):
             bad.append('%s 는 가운데여야 한다' % sel)
-    for sel in ['.hero .lead', '.key-lead', '.pane .lead']:
+    for sel in ['.hero .lead', '.pane .lead']:
         body = rule_body(sel)
         if body is None:
             bad.append('%s 규칙이 없다' % sel)
         elif centered(body):
             bad.append('%s 는 제목과 왼쪽을 맞춰야 한다' % sel)
-    check('L18', '독립 덩어리는 가운데, 제목 아래 리드는 왼쪽 정렬이다', not bad,
+    if 'justify-content: center' not in (rule_body('.lecture-detail .lecture-actions') or ''):
+        bad.append('본문 안 버튼은 가운데로 모아야 한다')
+    check('L18', '가운데 둘 것과 왼쪽에 맞출 것이 규칙대로다', not bad,
           '; '.join(bad))
 
     # L19 분량 상한

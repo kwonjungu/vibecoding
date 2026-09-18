@@ -80,6 +80,10 @@ def main():
     # 각 칸의 본문은 '다음 <section' 직전까지다. 마지막 칸이 꼬리 섹션을
     # 삼키지 않도록 rung 뿐 아니라 모든 section 시작 위치를 경계로 쓴다.
     starts = [m.start() for m in re.finditer(r'<section\b', html)]
+    tail = re.search(r'<footer', html)
+    if tail:
+        starts.append(tail.start())
+        starts.sort()
     bodies = {}
     for n, start in rungs.items():
         nxt = [p for p in starts if p > start]
@@ -199,9 +203,11 @@ def main():
     gone = [t for t in need_html if t not in html]
     if '.lecture-detail.is-collapsed' not in css:
         gone.append('.lecture-detail.is-collapsed 스타일')
+    if '.prompt-copy' not in css:
+        gone.append('.prompt-copy 스타일')
     if 'is-collapsible' not in css or 'is-open' not in css:
         gone.append('접힌 칸의 .lecture-row 여백 규칙')
-    check('L17', '접기·펼치기 토글이 붙어 있다', not gone,
+    check('L17', '접기·펼치기와 프롬프트 복사 버튼이 붙어 있다', not gone,
           '누락: %s' % ', '.join(gone))
 
     # L18 가로 정렬 — 독립 덩어리는 가운데, 제목 아래 리드는 왼쪽
@@ -224,6 +230,35 @@ def main():
             bad.append('%s 는 제목과 왼쪽을 맞춰야 한다' % sel)
     check('L18', '독립 덩어리는 가운데, 제목 아래 리드는 왼쪽 정렬이다', not bad,
           '; '.join(bad))
+
+    # L19 분량 상한
+    CAPS = {'why': 450, 'how': 1800, 'check': 220, 'trouble': 900,
+            'cards': 1100, 'checklist': 400}
+    PANE_CAP = 700
+
+    def prose(x):
+        x = re.sub(r'<table\b.*?</table>', '', x, flags=re.S)
+        x = re.sub(r'<pre\b.*?</pre>', '', x, flags=re.S)
+        return re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', x)).strip()
+
+    over = []
+    for n, b in bodies.items():
+        marks = list(re.finditer(r'data-block="(\w+)"', b))
+        for i, mk in enumerate(marks):
+            e = marks[i+1].start() if i+1 < len(marks) else len(b)
+            name = mk.group(1)
+            size = len(prose(b[mk.start():e]))
+            cap = CAPS.get(name)
+            if cap and size > cap:
+                over.append('rung-%d/%s %d>%d' % (n, name, size, cap))
+    for pane in ('safety', 'glossary', 'limits', 'beyond'):
+        m = re.search(r'<section\b[^>]*id="%s".*?(?=<section\b|<footer\b|$)' % pane, html, re.S)
+        if m:
+            size = len(prose(m.group(0)))
+            if size > PANE_CAP:
+                over.append('%s %d>%d' % (pane, size, PANE_CAP))
+    check('L19', '블록마다 분량 상한을 지킨다 (표·프롬프트 제외)', not over,
+          ' / '.join(over))
 
     # 출력
     width = max(len(t) for _, t, _, _ in results)

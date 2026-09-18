@@ -497,3 +497,30 @@ thead th { border-bottom-color: var(--accent); }
   .brand-mark img { height: 32px; }
   .brand-mark-wide img { height: 26px; }
 }
+
+/* =========================================================================
+   프롬프트 복사 버튼 (DESIGN.md §5)
+   ========================================================================= */
+.prompt-bar { display: flex; justify-content: flex-end; margin-bottom: var(--sp-xs); }
+
+.prompt-copy {
+  padding: var(--sp-xs) var(--sp-lg);
+  border-radius: var(--rounded-lg);
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.prompt-copy:hover { background: var(--accent); color: var(--on-primary); }
+
+.prompt-copy.is-done { background: var(--success); border-color: var(--success); color: var(--on-primary); }
+
+.offscreen { position: absolute; left: -9999px; top: 0; opacity: 0; }
+
+@media (max-width: 599px) {
+  .prompt-copy { width: 100%; }
+}

@@ -9,6 +9,7 @@
 import io
 import os
 import sys
+import zipfile
 
 try:
     sys.stdout.reconfigure(encoding='utf-8')
@@ -131,6 +132,52 @@ FOOT = u'''
     });
   }
 
+  // 프롬프트 복사 버튼
+  document.querySelectorAll('pre.prompt-box').forEach(function (box) {
+    var bar = document.createElement('div');
+    bar.className = 'prompt-bar';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'prompt-copy';
+    btn.textContent = '복사';
+    bar.appendChild(btn);
+    box.parentNode.insertBefore(bar, box);
+
+    btn.addEventListener('click', function () {
+      copy(box.textContent).then(function (ok) {
+        btn.textContent = ok ? '복사했습니다' : '직접 드래그해 복사하세요';
+        btn.classList.toggle('is-done', ok);
+        setTimeout(function () {
+          btn.textContent = '복사';
+          btn.classList.remove('is-done');
+        }, 2000);
+      });
+    });
+  });
+
+  // https 에서는 클립보드 API 를 쓰고, file:// 로 열었을 때는 대체 방법을 쓴다
+  function copy(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text)
+        .then(function () { return true; })
+        .catch(function () { return legacy(text); });
+    }
+    return Promise.resolve(legacy(text));
+  }
+
+  function legacy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.className = 'offscreen';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
   // 사다리 지도에서 칸을 고르면 그 칸만 펼친다.
   // 링크를 누르는 순간 먼저 펼쳐 두어야 브라우저가 최종 높이 기준으로 스크롤한다.
   Array.prototype.forEach.call(map ? map.querySelectorAll('a[href^="#rung-"]') : [], function (a) {
@@ -187,7 +234,37 @@ def main():
     io.open(target, 'w', encoding='utf-8').write(u''.join(out))
     lines = u''.join(out).count('\n') + 1
     print('index.html 생성 완료 — %d줄, 조각 %d개' % (lines, len(PARTS) - len(missing)))
+    make_drop_zip()
     return 1 if missing else 0
+
+
+def make_drop_zip():
+    """4칸 플랜 C(Netlify Drop) 실습용 묶음을 만든다.
+
+    배포에 필요한 것만 담는다. build/ tools/ docs/ 는 넣지 않는다.
+    index.html 을 만들 때마다 다시 만들어지므로 낡지 않는다.
+    """
+    out = os.path.join(ROOT, 'assets', 'files', 'netlify-drop-practice.zip')
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    picks = ['index.html', 'styles.css']
+    for base in ('assets/logo', 'assets/shot', 'demo'):
+        d = os.path.join(ROOT, base)
+        if not os.path.isdir(d):
+            continue
+        for name in sorted(os.listdir(d)):
+            picks.append(base + '/' + name)
+    total = 0
+    with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED) as z:
+        for rel in picks:
+            src = os.path.join(ROOT, rel)
+            if os.path.isfile(src):
+                z.write(src, '바이브코딩-사다리/' + rel)
+                total += 1
+    size = os.path.getsize(out) / 1024.0
+    print('Netlify Drop 실습 묶음 — 파일 %d개, %.0fKB' % (total, size))
+
+
+
 
 
 if __name__ == '__main__':

@@ -563,3 +563,13 @@ thead th { border-bottom-color: var(--accent); }
 .brand-mark.is-centered { display: flex; justify-content: center; }
 
 .lecture-actions.is-centered { justify-content: center; }
+
+/* 네 칸짜리 key-grid 변형 */
+.key-grid.is-four { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 900px) { .key-grid.is-four { grid-template-columns: repeat(2, 1fr); } }
+
+@media (max-width: 599px) { .key-grid.is-four { grid-template-columns: 1fr; } }
+
+/* 미션 칸의 힌트 (DESIGN.md §4.4) */
+details.hint { border-left-color: var(--accent); }

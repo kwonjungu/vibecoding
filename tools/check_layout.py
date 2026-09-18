@@ -232,9 +232,9 @@ def main():
           '; '.join(bad))
 
     # L19 분량 상한
-    CAPS = {'why': 450, 'how': 1800, 'check': 220, 'trouble': 900,
-            'cards': 1100, 'checklist': 400}
-    PANE_CAP = 700
+    CAPS = {'why': 320, 'how': 1300, 'check': 180, 'trouble': 650,
+            'cards': 1000, 'checklist': 300}
+    PANE_CAP = 450
 
     def prose(x):
         x = re.sub(r'<table\b.*?</table>', '', x, flags=re.S)

@@ -479,3 +479,24 @@ thead th { border-bottom-color: var(--accent); }
 }
 
 .expand-all:hover { border-color: var(--ink); color: var(--ink); }
+
+/* =========================================================================
+   브랜드 마크 (DESIGN.md §8)
+   원본 비율을 유지한 채 높이만 맞춘다. 로고를 늘이거나 자르지 않는다.
+   ========================================================================= */
+.brand-mark { margin: 0 0 var(--sp-lg); }
+
+.brand-mark img {
+  height: 40px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: var(--rounded-none);
+}
+
+.brand-mark-wide img { height: 32px; }
+
+@media (max-width: 599px) {
+  .brand-mark img { height: 32px; }
+  .brand-mark-wide img { height: 26px; }
+}

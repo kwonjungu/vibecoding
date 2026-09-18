@@ -181,6 +181,7 @@
 | `.check-list` | `list-style:none`, 앞에 `✓` 의사요소, 색 `--success` |
 | `.trouble` | `<details>` + `<summary>`. 좌측 4px `--sale` 띠 |
 | `.btn` | pill(`--rounded-lg`). `.btn-primary`는 `--ink` 배경 / 흰 글씨, `.btn-secondary`는 테두리만 |
+| `.brand-mark` | 브랜드 로고 자리. `<figure>` + `<img>`. 높이만 40px(넓은 워드마크는 32px)로 맞추고 **비율은 원본 그대로** 둔다. 늘이거나 자르지 않는다. 로고는 `assets/logo/` 에 내려받아 보관하고 핫링크하지 않는다 |
 | `.guide-shot` | `<figure>`. 캡처 자리. 없을 땐 비워 두되 `figcaption`으로 "연수 전 촬영" 표시 |
 | `table` | 열 머리(`thead th`)만 12px 대문자 kicker + 강조색 2px 밑줄. 행 머리(`tbody th`)는 본문 크기 굵은 글씨에 다른 칸과 같은 1px 밑줄. `th` 전체에 머리 스타일을 걸면 행 머리까지 작아지고 줄마다 굵은 색선이 생긴다 |
 

@@ -54,8 +54,9 @@
 | 5 서버 체험 | `--rung-5` | `#1151ff` | `#e8eeff` | 블루 |
 | 6 사진 캘린더 | `--rung-6` | `#3d3a8c` | `#ecebf7` | 인디고 |
 | 7 AI 부르기 | `--rung-7` | `#8a1c4b` | `#f8e9f0` | 플럼 |
+| 8 마치며 | `--rung-8` | `#39393b` | `#f5f5f5` | 무채. 사다리를 벗어나 밖을 보는 칸이라 색을 거둔다 |
 
-꼬리 네 섹션도 같은 방식으로 `--pane-safety` `#8a1c4b` · `--pane-glossary` `#39393b` · `--pane-limits` `#0a7281` · `--pane-beyond` `#39393b` 를 갖는다.
+꼬리 세 섹션도 같은 방식으로 `--pane-safety` `#8a1c4b` · `--pane-glossary` `#39393b` · `--pane-limits` `#0a7281` 을 갖는다.
 
 색은 위 12개 토큰과 이 강조색이 전부다. 그 밖의 색상값을 새로 쓰지 않는다.
 
@@ -106,7 +107,7 @@
 
 ```
 1  section.hero            질문형 헤드라인
-2  section.ladder-map      8칸 지도 (탭 역할)
+2  section.ladder-map      9칸 지도 (탭 역할)
 3  section.lecture#rung-0  준비물 챙기기
 4  section.lecture#rung-1  배경지식
 5  section.lecture#rung-2  웹페이지 디자인
@@ -114,11 +115,11 @@
 7  section.lecture#rung-4  주소 만들기
 8  section.lecture#rung-5  서버 체험
 9  section.lecture#rung-6  사진 캘린더
-10 section.lecture#rung-7  앱이 AI를 부르게
-11 section.safety          안전 한 장
-12 section.glossary        용어 한 장
-13 section.limits          무료 한도 표
-14 section.beyond          더 멀리 가려면
+10 section.lecture#rung-7  캘린더에 AI 붙이기
+11 section.lecture#rung-8  마치며
+12 section.safety          안전 한 장
+13 section.glossary        용어 한 장
+14 section.limits          무료 한도 표
 ```
 
 - 칸 섹션은 `id="rung-N"`과 `data-rung="N"`을 함께 가진다 (**L02**).
@@ -185,7 +186,7 @@
 
 답을 바로 주지 않되 막힌 사람이 꺼내 볼 수 있도록 `<details class="hint">` 를 `how` 안에 둔다. `.trouble` 과 생김새는 같고 띠 색만 그 칸의 강조색을 쓴다.
 
-**예외 (L06)**: `rung-1`(배경지식)은 실습이 없어 `cards`(핵심 카드 4개) + `checklist` 두 블록만 갖는다. `rung-0`(준비물)은 `cards`(계정 카드 3개) + `check`를 갖는다.
+**예외 (L06)**: `rung-8`(마치며)은 `cards` + `checklist` 를 갖는다. 실습이 아니라 사다리를 마치고 밖을 보는 칸이다. `rung-1`(배경지식)은 실습이 없어 `cards`(핵심 카드 4개) + `checklist` 두 블록만 갖는다. `rung-0`(준비물)은 `cards`(계정 카드 3개) + `check`를 갖는다.
 
 ---
 
@@ -193,7 +194,7 @@
 
 | 클래스 | 규격 |
 |---|---|
-| `.ladder-map` | 8칸 그리드. 데스크톱 4열 × 2행, 768px 이하 1열. 각 항목은 `번호 · 제목 · 도구 · 남는 것` 4줄, `href="#rung-N"` (**L08**) |
+| `.ladder-map` | 9칸 그리드. 데스크톱 3열 × 3행, 768px 이하 1열. 각 항목은 `번호 · 제목 · 도구 · 남는 것` 4줄, `href="#rung-N"` (**L08**) |
 | `.note-card` | 배경 `--soft-cloud`, 라운드 0, 그림자 없음, 패딩 `--sp-xl` |
 | `.guide-key` / `.key-grid` | 3열(768px 이하 1열). 각 `.key-item`은 `.key-label`(kicker) + `.key-text` |
 | `.prompt-box` | `--soft-cloud` 배경, 좌측 4px `--ink` 띠, `pre` 유지, 사용자가 드래그해 복사 |

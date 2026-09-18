@@ -23,7 +23,8 @@ PARTS = [
     '03-rung-2-3.html',
     '04-rung-4.html',
     '05-rung-5-7.html',
-    '06-tail.html',
+    '06-rung-8.html',
+    '07-tail.html',
 ]
 
 HEAD = u'''<!DOCTYPE html>

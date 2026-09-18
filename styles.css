@@ -430,11 +430,11 @@ tbody th { font-weight: 700; color: var(--ink); }
   --rung-5: #1151ff;  --rung-5-soft: #e8eeff;
   --rung-6: #3d3a8c;  --rung-6-soft: #ecebf7;
   --rung-7: #8a1c4b;  --rung-7-soft: #f8e9f0;
+  --rung-8: #39393b;  --rung-8-soft: #f5f5f5;
 
   --pane-safety: #8a1c4b;    --pane-safety-soft: #f8e9f0;
   --pane-glossary: #39393b;  --pane-glossary-soft: #f5f5f5;
   --pane-limits: #0a7281;    --pane-limits-soft: #e6f2f3;
-  --pane-beyond: #39393b;    --pane-beyond-soft: #f5f5f5;
 
   --accent: var(--ink);
   --accent-soft: var(--soft-cloud);
@@ -448,11 +448,11 @@ section[data-rung="4"] { --accent: var(--rung-4); --accent-soft: var(--rung-4-so
 section[data-rung="5"] { --accent: var(--rung-5); --accent-soft: var(--rung-5-soft); }
 section[data-rung="6"] { --accent: var(--rung-6); --accent-soft: var(--rung-6-soft); }
 section[data-rung="7"] { --accent: var(--rung-7); --accent-soft: var(--rung-7-soft); }
+section[data-rung="8"] { --accent: var(--rung-8); --accent-soft: var(--rung-8-soft); }
 
 #safety   { --accent: var(--pane-safety);   --accent-soft: var(--pane-safety-soft); }
 #glossary { --accent: var(--pane-glossary); --accent-soft: var(--pane-glossary-soft); }
 #limits   { --accent: var(--pane-limits);   --accent-soft: var(--pane-limits-soft); }
-#beyond   { --accent: var(--pane-beyond);   --accent-soft: var(--pane-beyond-soft); }
 
 /* 강조색을 쓰는 곳 */
 .lecture-media { background: var(--accent-soft); }
@@ -477,6 +477,7 @@ thead th { border-bottom-color: var(--accent); }
 .rung-card[href="#rung-5"] { border-top-color: var(--rung-5); }
 .rung-card[href="#rung-6"] { border-top-color: var(--rung-6); }
 .rung-card[href="#rung-7"] { border-top-color: var(--rung-7); }
+.rung-card[href="#rung-8"] { border-top-color: var(--rung-8); }
 
 /* =========================================================================
    접기 / 펼치기 (DESIGN.md §4.3 L17)

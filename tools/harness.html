@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>레이아웃 하네스 — 바이브코딩 사다리</title>
+<style>
+  :root { --ink:#111; --soft:#f5f5f5; --line:#e5e5e5; --ok:#007d48; --bad:#d30005; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.5 Pretendard, system-ui, sans-serif; color:var(--ink); background:#fff; }
+  header { padding:24px 40px; border-bottom:1px solid var(--line); }
+  h1 { margin:0 0 4px; font-size:22px; }
+  p.note { margin:0; color:#707072; font-size:14px; }
+  #report { padding:18px 40px; border-bottom:1px solid var(--line); background:var(--soft); font-size:14px; }
+  #report div { margin-bottom:4px; }
+  .ok::before { content:"PASS  "; color:var(--ok); font-weight:700; }
+  .bad::before { content:"FAIL  "; color:var(--bad); font-weight:700; }
+  main { display:flex; gap:24px; padding:24px 40px; align-items:flex-start; overflow-x:auto; }
+  section { flex:0 0 auto; }
+  h2 { font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:#707072; margin:0 0 8px; }
+  iframe { border:1px solid var(--line); background:#fff; display:block; }
+</style>
+</head>
+<body>
+<header>
+  <h1>레이아웃 하네스</h1>
+  <p class="note">
+    <code>python -m http.server 8000</code> 을 저장소 폴더에서 실행한 뒤
+    <code>http://localhost:8000/tools/harness.html</code> 로 여세요.
+    file:// 로 열면 같은 출처가 아니라 자동 검사가 동작하지 않습니다.
+  </p>
+</header>
+
+<div id="report">검사 중…</div>
+
+<main id="stage"></main>
+
+<script>
+  var WIDTHS = [360, 768, 1280];
+  var HEIGHT = 900;
+  var stage = document.getElementById('stage');
+  var report = document.getElementById('report');
+  var lines = [];
+
+  WIDTHS.forEach(function (w) {
+    var sec = document.createElement('section');
+    var h2 = document.createElement('h2');
+    h2.textContent = w + 'px';
+    var f = document.createElement('iframe');
+    f.src = '../index.html';
+    f.width = w;
+    f.height = HEIGHT;
+    f.dataset.w = w;
+    sec.appendChild(h2);
+    sec.appendChild(f);
+    stage.appendChild(sec);
+    f.addEventListener('load', function () { inspect(f, w); });
+    f.addEventListener('error', function () { push(false, w + 'px — index.html 을 불러오지 못했습니다'); });
+  });
+
+  function push(ok, text) {
+    lines.push('<div class="' + (ok ? 'ok' : 'bad') + '">' + text + '</div>');
+    report.innerHTML = lines.join('');
+  }
+
+  function inspect(frame, w) {
+    var doc;
+    try { doc = frame.contentDocument; } catch (e) { doc = null; }
+    if (!doc) { push(false, w + 'px — 같은 출처가 아니라 검사할 수 없습니다. http.server 로 여세요'); return; }
+    var el = doc.documentElement;
+
+    var overflow = el.scrollWidth - el.clientWidth;
+    push(overflow <= 1, w + 'px — 가로 스크롤 없음 (넘침 ' + overflow + 'px)');
+
+    var rows = doc.querySelectorAll('.lecture-row');
+    if (rows.length) {
+      var oneCol = true;
+      rows.forEach(function (r) {
+        var kids = r.children;
+        if (kids.length >= 2 && kids[0].getBoundingClientRect().top === kids[1].getBoundingClientRect().top) oneCol = false;
+      });
+      if (w <= 900) push(oneCol, w + 'px — .lecture-row 가 1열로 전환됨');
+      else push(!oneCol, w + 'px — .lecture-row 가 2열 유지');
+    }
+
+    var rungs = doc.querySelectorAll('section[data-rung]');
+    push(rungs.length === 9, w + 'px — 칸 9개 발견 (실제 ' + rungs.length + '개)');
+
+    var wide = 0;
+    doc.querySelectorAll('table').forEach(function (t) {
+      var box = t.closest('.table-scroll');
+      if (t.scrollWidth > el.clientWidth && !box) wide++;
+    });
+    push(wide === 0, w + 'px — 넓은 표가 모두 .table-scroll 안에 있음 (밖 ' + wide + '개)');
+  }
+</script>
+</body>
+</html>

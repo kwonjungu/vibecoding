@@ -524,3 +524,8 @@ thead th { border-bottom-color: var(--accent); }
 @media (max-width: 599px) {
   .prompt-copy { width: 100%; }
 }
+
+/* 가운데 정렬 변형 (DESIGN.md §5) */
+.brand-mark.is-centered { display: flex; justify-content: center; }
+
+.lecture-actions.is-centered { justify-content: center; }

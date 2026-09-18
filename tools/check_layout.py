@@ -77,11 +77,13 @@ def main():
           ('칸 %d개만 발견' % len(rungs) if len(rungs) != 9 else ''))
 
     # 칸 본문 잘라두기
-    order = sorted(rungs.items(), key=lambda kv: kv[1])
+    # 각 칸의 본문은 '다음 <section' 직전까지다. 마지막 칸이 꼬리 섹션을
+    # 삼키지 않도록 rung 뿐 아니라 모든 section 시작 위치를 경계로 쓴다.
+    starts = [m.start() for m in re.finditer(r'<section\b', html)]
     bodies = {}
-    for i, (n, start) in enumerate(order):
-        end = order[i + 1][1] if i + 1 < len(order) else len(html)
-        bodies[n] = html[start:end]
+    for n, start in rungs.items():
+        nxt = [p for p in starts if p > start]
+        bodies[n] = html[start:(nxt[0] if nxt else len(html))]
 
     # L03 lecture-row 구성
     bad = [n for n, b in bodies.items()

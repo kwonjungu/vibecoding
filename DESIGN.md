@@ -78,6 +78,9 @@
 | h3 | 20px / 1.3, 700 | ui | 블록 제목 |
 | lead | 18px / 1.6 | ui | 칸 도입 문단 |
 | body | 16px / 1.5 | ui | 본문 |
+| key-lead | 20px / 1.5, 600 | ui | `.guide-key` 도입 문단. 본문보다 크고 굵다 |
+| key-text | 18px / 1.5 | ui | `.key-item` 설명. 전자칠판에서 읽히는 최소 크기 |
+| key-label | 14px, 700 | ui | 알약 배지. 강조색 바탕에 흰 글씨 |
 | kicker | 12px / 1.2, letter-spacing .12em, 대문자 | ui | `SECTION 01` |
 | caption | 14px / 1.5 | ui | 캡션·각주 |
 

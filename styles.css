@@ -35,7 +35,7 @@
   --sp-xxl: 30px;
   --sp-section: 48px;
 
-  --content-max: 1440px;
+  --content-max: 1280px;
   --gutter: 40px;
 
   --font-display: "Black Han Sans", "Bebas Neue", "Pretendard", sans-serif;
@@ -73,7 +73,8 @@ table { border-collapse: collapse; width: 100%; }
 .emoji { font-style: normal; }
 
 /* ---------- Section frame ---------- */
-section {
+section,
+footer.pane {
   padding: var(--sp-section) var(--gutter);
   max-width: var(--content-max);
   margin: 0 auto;
@@ -210,7 +211,7 @@ figcaption, .caption { font-size: 14px; color: var(--ash); margin-top: var(--sp-
 .lecture-copy .lead { margin-bottom: 0; }
 
 /* ---------- Detail blocks ---------- */
-.lecture-detail { max-width: 62em; }
+.lecture-detail { max-width: 64em; margin-left: auto; margin-right: auto; }
 
 .detail-block { padding-top: var(--sp-xl); }
 
@@ -314,7 +315,9 @@ details p:last-child, details ul:last-child { margin-bottom: 0; }
 
 th, td { text-align: left; padding: var(--sp-md); border-bottom: 1px solid var(--hairline-soft); vertical-align: top; }
 
-th { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); border-bottom: 2px solid var(--ink); }
+thead th { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); border-bottom: 2px solid var(--ink); }
+
+tbody th { font-weight: 700; color: var(--ink); }
 
 /* ---------- pane (tail sections) ---------- */
 .pane .lead { max-width: 52em; }
@@ -341,13 +344,16 @@ th { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: 
 
 @media (max-width: 599px) {
   :root { --gutter: 20px; }
-  section { padding-top: var(--sp-xxl); padding-bottom: var(--sp-xxl); }
+  section,
+  footer.pane { padding-top: var(--sp-xxl); padding-bottom: var(--sp-xxl); }
   .hero { padding-top: var(--sp-section); }
   .display-campaign { font-size: 52px; }
   .lecture-no { font-size: 64px; }
   h2 { font-size: 30px; }
   .lead { font-size: 16px; }
-  .btn { width: 100%; text-align: center; }
+  .btn,
+  .lecture-toggle,
+  .expand-all { width: 100%; text-align: center; }
 }
 
 /* ---------- 조각에서 쓰인 보조 클래스 ---------- */
@@ -367,4 +373,109 @@ th { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: 
 
 .hero-actions { display: flex; flex-wrap: wrap; gap: var(--sp-md); margin-top: var(--sp-xl); }
 
-.ladder-note { color: var(--charcoal); max-width: 52em; margin-bottom: 0; }
+.ladder-note { color: var(--charcoal); max-width: 52em; margin: 0 auto; }
+
+/* =========================================================================
+   칸 강조색 (DESIGN.md §2 L16)
+   컴포넌트는 --accent / --accent-soft 만 참조한다.
+   ========================================================================= */
+:root {
+  --rung-0: #1f2933;  --rung-0-soft: #eef1f4;
+  --rung-1: #5b4636;  --rung-1-soft: #f4efe9;
+  --rung-2: #b3431f;  --rung-2-soft: #fbeee8;
+  --rung-3: #985908;  --rung-3-soft: #fbf1e2;
+  --rung-4: #0a7281;  --rung-4-soft: #e6f2f3;
+  --rung-5: #1f6f43;  --rung-5-soft: #e9f3ed;
+  --rung-6: #1151ff;  --rung-6-soft: #e8eeff;
+  --rung-7: #3d3a8c;  --rung-7-soft: #ecebf7;
+  --rung-8: #8a1c4b;  --rung-8-soft: #f8e9f0;
+
+  --pane-safety: #8a1c4b;    --pane-safety-soft: #f8e9f0;
+  --pane-glossary: #39393b;  --pane-glossary-soft: #f5f5f5;
+  --pane-limits: #0a7281;    --pane-limits-soft: #e6f2f3;
+  --pane-beyond: #39393b;    --pane-beyond-soft: #f5f5f5;
+
+  --accent: var(--ink);
+  --accent-soft: var(--soft-cloud);
+}
+
+section[data-rung="0"] { --accent: var(--rung-0); --accent-soft: var(--rung-0-soft); }
+section[data-rung="1"] { --accent: var(--rung-1); --accent-soft: var(--rung-1-soft); }
+section[data-rung="2"] { --accent: var(--rung-2); --accent-soft: var(--rung-2-soft); }
+section[data-rung="3"] { --accent: var(--rung-3); --accent-soft: var(--rung-3-soft); }
+section[data-rung="4"] { --accent: var(--rung-4); --accent-soft: var(--rung-4-soft); }
+section[data-rung="5"] { --accent: var(--rung-5); --accent-soft: var(--rung-5-soft); }
+section[data-rung="6"] { --accent: var(--rung-6); --accent-soft: var(--rung-6-soft); }
+section[data-rung="7"] { --accent: var(--rung-7); --accent-soft: var(--rung-7-soft); }
+section[data-rung="8"] { --accent: var(--rung-8); --accent-soft: var(--rung-8-soft); }
+
+#safety   { --accent: var(--pane-safety);   --accent-soft: var(--pane-safety-soft); }
+#glossary { --accent: var(--pane-glossary); --accent-soft: var(--pane-glossary-soft); }
+#limits   { --accent: var(--pane-limits);   --accent-soft: var(--pane-limits-soft); }
+#beyond   { --accent: var(--pane-beyond);   --accent-soft: var(--pane-beyond-soft); }
+
+/* 강조색을 쓰는 곳 */
+.lecture-media { background: var(--accent-soft); }
+.lecture-no { color: var(--accent); }
+.lecture-kicker { color: var(--accent); }
+.lecture { border-top: 4px solid var(--accent); }
+.pane { border-top: 4px solid var(--accent); }
+footer.pane { border-top: 1px solid var(--hairline-soft); }
+.key-item { border-top-color: var(--accent); }
+.prompt-box { border-left-color: var(--accent); }
+.note-card { border-top: 2px solid var(--accent); }
+thead th { border-bottom-color: var(--accent); }
+.detail-block h3 { color: var(--accent); }
+
+/* 지도 카드에도 같은 색을 얹는다 */
+.rung-card { border-top: 4px solid var(--hairline-soft); }
+.rung-card[href="#rung-0"] { border-top-color: var(--rung-0); }
+.rung-card[href="#rung-1"] { border-top-color: var(--rung-1); }
+.rung-card[href="#rung-2"] { border-top-color: var(--rung-2); }
+.rung-card[href="#rung-3"] { border-top-color: var(--rung-3); }
+.rung-card[href="#rung-4"] { border-top-color: var(--rung-4); }
+.rung-card[href="#rung-5"] { border-top-color: var(--rung-5); }
+.rung-card[href="#rung-6"] { border-top-color: var(--rung-6); }
+.rung-card[href="#rung-7"] { border-top-color: var(--rung-7); }
+.rung-card[href="#rung-8"] { border-top-color: var(--rung-8); }
+
+/* =========================================================================
+   접기 / 펼치기 (DESIGN.md §4.3 L17)
+   ========================================================================= */
+.lecture-detail.is-collapsed { display: none; }
+
+/* 접힌 칸에서는 머리 줄 아래 여백이 뜨지 않게 한다.
+   is-collapsible 은 스크립트가 붙이므로 JS 가 꺼진 환경에는 영향이 없다. */
+.lecture.is-collapsible:not(.is-open) .lecture-row { margin-bottom: 0; }
+
+.lecture-toggle {
+  display: inline-block;
+  padding: var(--sp-md) var(--sp-xxl);
+  border-radius: var(--rounded-lg);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+  cursor: pointer;
+}
+
+.lecture-toggle[aria-expanded="true"] { background: var(--accent); color: var(--on-primary); }
+
+.lecture-toggle:hover { opacity: 0.78; }
+
+.map-actions { display: flex; justify-content: flex-end; margin-top: var(--sp-lg); }
+
+.expand-all {
+  padding: var(--sp-sm) var(--sp-xl);
+  border-radius: var(--rounded-lg);
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--ash);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.expand-all:hover { border-color: var(--ink); color: var(--ink); }

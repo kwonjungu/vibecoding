@@ -180,6 +180,51 @@ def main():
           
           '추가 사용: %s' % ', '.join(sorted(extra)))
 
+    # L16 칸 강조색
+    miss = []
+    for i in range(9):
+        if '--rung-%d:' % i not in css or '--rung-%d-soft:' % i not in css:
+            miss.append('--rung-%d' % i)
+        if 'section[data-rung="%d"]' % i not in css:
+            miss.append('data-rung=%d 매핑' % i)
+    for name in ('safety', 'glossary', 'limits', 'beyond'):
+        if '--pane-%s:' % name not in css:
+            miss.append('--pane-%s' % name)
+    check('L16', '칸마다 강조색과 바탕색이 정의·매핑돼 있다', not miss,
+          '누락: %s' % ', '.join(miss[:6]))
+
+    # L17 접기·펼치기
+    need_html = ['lecture-toggle', 'aria-expanded', 'aria-controls',
+                 'is-collapsed', 'is-collapsible', 'is-open', 'expand-all']
+    gone = [t for t in need_html if t not in html]
+    if '.lecture-detail.is-collapsed' not in css:
+        gone.append('.lecture-detail.is-collapsed 스타일')
+    if 'is-collapsible' not in css or 'is-open' not in css:
+        gone.append('접힌 칸의 .lecture-row 여백 규칙')
+    check('L17', '접기·펼치기 토글이 붙어 있다', not gone,
+          '누락: %s' % ', '.join(gone))
+
+    # L18 가로 정렬 — 독립 덩어리는 가운데, 제목 아래 리드는 왼쪽
+    def rule_body(sel):
+        m = re.search(re.escape(sel) + r'\s*\{([^}]*)\}', css)
+        return m.group(1) if m else None
+
+    def centered(body):
+        return body is not None and ('margin-left: auto' in body or 'margin: 0 auto' in body)
+
+    bad = []
+    for sel in ['.lecture-detail', '.ladder-note']:
+        if not centered(rule_body(sel)):
+            bad.append('%s 는 가운데여야 한다' % sel)
+    for sel in ['.hero .lead', '.key-lead', '.pane .lead']:
+        body = rule_body(sel)
+        if body is None:
+            bad.append('%s 규칙이 없다' % sel)
+        elif centered(body):
+            bad.append('%s 는 제목과 왼쪽을 맞춰야 한다' % sel)
+    check('L18', '독립 덩어리는 가운데, 제목 아래 리드는 왼쪽 정렬이다', not bad,
+          '; '.join(bad))
+
     # 출력
     width = max(len(t) for _, t, _, _ in results)
     fails = 0

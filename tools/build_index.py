@@ -45,6 +45,123 @@ FOOT = u'''
 <footer class="pane">
   <p class="caption">바이브코딩 사다리 · 브라우저에서 무료로 되는 것만 담았습니다.</p>
 </footer>
+
+<script>
+(function () {
+  var items = [];
+  var byId = {};
+  var allBtn = null;
+
+  function setOpen(item, open) {
+    item.detail.classList.toggle('is-collapsed', !open);
+    item.sec.classList.toggle('is-open', open);
+    item.btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    item.btn.textContent = open ? '접기' : '자세히 보기';
+  }
+
+  // 모두 펼치기 버튼의 라벨은 실제 상태에서 끌어낸다.
+  // 그래야 개별 토글로 몇 개 펼친 뒤에 눌러도 한 번에 반응한다.
+  function syncAll() {
+    if (!allBtn) { return; }
+    var anyClosed = items.some(function (it) {
+      return it.detail.classList.contains('is-collapsed');
+    });
+    allBtn.textContent = anyClosed ? '모두 펼치기' : '모두 접기';
+    allBtn.setAttribute('aria-expanded', anyClosed ? 'false' : 'true');
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('section.lecture'), function (sec) {
+    var detail = sec.querySelector('.lecture-detail');
+    var copy = sec.querySelector('.lecture-copy');
+    if (!detail || !copy) { return; }
+
+    detail.id = 'detail-' + sec.getAttribute('data-rung');
+    detail.classList.add('is-collapsed');
+    sec.classList.add('is-collapsible');
+
+    // 머리 줄에 이미 있는 .lecture-actions 만 재활용한다.
+    // 본문(.lecture-detail) 안의 .lecture-actions 는 접히면 같이 사라지므로 쓰지 않는다.
+    var actions = null;
+    for (var i = 0; i < copy.children.length; i += 1) {
+      if (copy.children[i].className === 'lecture-actions') { actions = copy.children[i]; break; }
+    }
+    if (!actions) {
+      actions = document.createElement('div');
+      actions.className = 'lecture-actions';
+      copy.appendChild(actions);
+    }
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'lecture-toggle';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', detail.id);
+    btn.textContent = '자세히 보기';
+    actions.insertBefore(btn, actions.firstChild);
+
+    var item = { sec: sec, detail: detail, btn: btn };
+    items.push(item);
+    byId[sec.id] = item;
+
+    btn.addEventListener('click', function () {
+      setOpen(item, detail.classList.contains('is-collapsed'));
+      syncAll();
+    });
+  });
+
+  // 모두 펼치기 / 모두 접기
+  var map = document.getElementById('ladder-map');
+  if (map && items.length) {
+    var wrap = document.createElement('div');
+    wrap.className = 'map-actions';
+    allBtn = document.createElement('button');
+    allBtn.type = 'button';
+    allBtn.className = 'expand-all';
+    allBtn.textContent = '모두 펼치기';
+    allBtn.setAttribute('aria-expanded', 'false');
+    wrap.appendChild(allBtn);
+    map.appendChild(wrap);
+
+    allBtn.addEventListener('click', function () {
+      var opening = items.some(function (it) {
+        return it.detail.classList.contains('is-collapsed');
+      });
+      items.forEach(function (it) { setOpen(it, opening); });
+      syncAll();
+    });
+  }
+
+  // 사다리 지도에서 칸을 고르면 그 칸만 펼친다.
+  // 링크를 누르는 순간 먼저 펼쳐 두어야 브라우저가 최종 높이 기준으로 스크롤한다.
+  Array.prototype.forEach.call(map ? map.querySelectorAll('a[href^="#rung-"]') : [], function (a) {
+    a.addEventListener('click', function () {
+      var item = byId[a.getAttribute('href').slice(1)];
+      if (item) { setOpen(item, true); syncAll(); }
+    });
+  });
+
+  function openFromHash(instant) {
+    var id = window.location.hash.replace('#', '');
+    if (!id) { return; }
+    var item = byId[id];          // 칸이 아닌 해시(#safety 등)나 없는 해시면 그냥 넘어간다
+    if (!item) { return; }
+    var wasClosed = item.detail.classList.contains('is-collapsed');
+    setOpen(item, true);
+    syncAll();
+    if (wasClosed && item.sec.scrollIntoView) {
+      // 펼치면서 문서 높이가 늘어나므로 위치를 다시 맞춘다
+      try {
+        item.sec.scrollIntoView({ behavior: instant ? 'instant' : 'smooth', block: 'start' });
+      } catch (e) {
+        item.sec.scrollIntoView(true);
+      }
+    }
+  }
+
+  window.addEventListener('hashchange', function () { openFromHash(false); });
+  openFromHash(true);
+}());
+</script>
 </body>
 </html>
 '''

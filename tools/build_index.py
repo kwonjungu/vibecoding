@@ -240,7 +240,7 @@ def main():
 
 
 def make_drop_zip():
-    """4칸 플랜 C(Netlify Drop) 실습용 묶음을 만든다.
+    """4칸 길 C·D(버셀 드롭·넷틀리파이 드롭) 실습용 묶음을 만든다.
 
     배포에 필요한 것만 담는다. build/ tools/ docs/ 는 넣지 않는다.
     index.html 을 만들 때마다 다시 만들어지므로 낡지 않는다.

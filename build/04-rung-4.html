@@ -19,7 +19,7 @@
 
     <div class="detail-block" data-block="how">
       <h3>이렇게 합니다</h3>
-      <p class="lead">파일 하나면 A, 폴더를 오래 쓰려면 B, 지금 보여만 주면 C, 빨리 띄우려면 D입니다.</p>
+      <p class="lead">파일 하나면 A, 폴더를 오래 쓰려면 B, 지금 당장 주소만 있으면 되면 C나 D입니다.</p>
 
       <div class="table-scroll">
         <table>
@@ -30,11 +30,12 @@
           <tbody>
             <tr><th scope="row">길 A</th><td>깃허브 파일 업로드. 저장소에 파일을 끌어다 놓습니다</td><td>깃허브 페이지</td><td>깃허브는 풀어 주지 않고 파일 하나로 보관합니다. zip째 올리면 사이트가 아니라 내려받기 링크가 되고, index.html이 최상위에 없어 404가 납니다. 반드시 압축을 풀어 폴더 아이콘째 끌어다 놓습니다. 폴더를 열어 안의 파일을 끌면 브라우저가 이름만 넘겨 경로가 사라집니다. 폴더 끌어놓기는 크롬과 엣지에서 됩니다. 이 함정은 길 A에만 있습니다</td><td>공개 저장소면 없습니다</td></tr>
             <tr><th scope="row">길 B</th><td>깃허브 싱크. AI Studio Build의 GitHub 탭으로 저장소와 연결합니다</td><td>깃허브 페이지</td><td>AI Studio가 폴더 구조를 그대로 밀어 올립니다. 폴더가 여러 겹이면 길 B가 맞습니다</td><td>공개 저장소면 없습니다</td></tr>
-            <tr><th scope="row">길 C</th><td>퍼블리시. AI Studio Build 위쪽 Publish 탭으로 빌드해 바로 올립니다</td><td>ai.studio 주소</td><td>폴더를 통째로 받습니다</td><td>Starter Tier는 결제 수단 없이 쓰고 무료 배포는 계정마다 두 번, 넘으면 쓴 만큼 붙습니다. 한 학기 내내 열어 둘 앱은 길 A나 길 B가 안전합니다</td></tr>
-            <tr><th scope="row">길 D</th><td>중개 사이트. <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">Netlify Drop</a> 이나 <a href="https://vercel.com/drop" target="_blank" rel="noopener">Vercel Drop</a> 에 폴더나 zip을 끌어다 놓고 이름을 적어 배포하면 몇 초 만에 주소가 나옵니다</td><td>무작위 주소</td><td>폴더나 zip을 통째로 받아 알아서 풉니다. 실습 묶음을 zip 그대로 놓아도 됩니다</td><td>없습니다</td></tr>
+            <tr><th scope="row">길 C</th><td>버셀 드롭. <a href="https://vercel.com/drop" target="_blank" rel="noopener">Vercel Drop</a> 에 폴더나 zip을 끌어다 놓습니다</td><td><code>.vercel.app</code> 무작위 주소</td><td>폴더나 zip을 통째로 받아 알아서 풉니다. 실습 묶음을 zip 그대로 놓아도 됩니다</td><td>없습니다</td></tr>
+            <tr><th scope="row">길 D</th><td>넷틀리파이 드롭. <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">Netlify Drop</a> 에 폴더나 zip, 파일 한 개를 끌어다 놓습니다</td><td><code>.netlify.app</code> 무작위 주소</td><td>같습니다. 파일 한 개만 놓아도 됩니다</td><td>없습니다</td></tr>
           </tbody>
         </table>
       </div>
+      <p class="caption">AI Studio Build 위쪽 Publish 탭으로 바로 올릴 수도 있지만 무료 배포가 계정마다 두 번뿐이라 여기서는 다루지 않습니다.</p>
 
       <div class="note-cards">
         <div class="note-card">
@@ -93,6 +94,36 @@
         </div>
       </div>
 
+      <div class="note-cards">
+        <div class="note-card">
+          <h3>길 C. 버셀 드롭</h3>
+          <ol>
+            <li><code>vercel.com/drop</code> 을 엽니다.</li>
+            <li>압축 푼 폴더를 통째로, 또는 zip 그대로 끌어다 놓습니다.</li>
+            <li>몇 초 뒤 <code>.vercel.app</code> 으로 끝나는 주소가 나옵니다.</li>
+            <li>로그인해 내 계정에 붙여 둡니다. 붙여 두어야 나중에 고치고 지웁니다.</li>
+          </ol>
+          <figure class="guide-shot">
+            <img src="assets/shot/rung4-drop-vercel.png" alt="Vercel Drop 화면. 점선 테두리 안에 Drop It. It's Live. 라는 문구와 파일, 폴더, zip을 끌어다 놓으라는 안내가 있는 모습" loading="lazy" />
+            <figcaption>여기에 끌어다 놓습니다.</figcaption>
+          </figure>
+        </div>
+
+        <div class="note-card">
+          <h3>길 D. 넷틀리파이 드롭</h3>
+          <ol>
+            <li><code>app.netlify.com/drop</code> 을 엽니다.</li>
+            <li>폴더나 zip, 파일 한 개를 끌어다 놓습니다.</li>
+            <li>바로 <code>.netlify.app</code> 무작위 주소가 나옵니다.</li>
+            <li>Claim your project 를 눌러 내 계정에 붙여 둡니다.</li>
+          </ol>
+          <figure class="guide-shot">
+            <img src="assets/shot/rung4-drop-netlify.png" alt="Netlify Drop 화면. Drag and drop to publish instantly 라는 큰 글씨 아래 Drop here 라고 적힌 자리가 있는 모습" loading="lazy" />
+            <figcaption>붙여 두지 않은 주소는 임시입니다.</figcaption>
+          </figure>
+        </div>
+      </div>
+
       <p> 앱이 없으면 아래 묶음을 씁니다.</p>
       <div class="lecture-actions">
         <a class="btn btn-primary" href="assets/files/netlify-drop-practice.zip" download>실습 묶음 내려받기</a>
@@ -116,7 +147,7 @@
             <p class="key-text">깃허브가 대신 빌드합니다. 액션입니다.</p>
           </div>
         </div>
-        <figure class="guide-shot">
+        <figure class="guide-shot is-centered">
           <img src="assets/shot/rung4-github-repo.png" alt="깃허브 저장소의 파일 목록 화면. 폴더와 파일마다 마지막으로 고친 내용과 시점이 함께 적혀 있는 모습" loading="lazy" />
           <figcaption>기록이 남습니다.</figcaption>
         </figure>

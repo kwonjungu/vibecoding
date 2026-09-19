@@ -8,14 +8,14 @@
 
 | 칸 | 제목 | 도구 | 끝나면 남는 것 |
 |---|---|---|---|
-| 0 | 준비물 챙기기 | GitHub · AI Studio · Firebase | 계정 3개 |
+| 0 | 준비물 챙기기 | GitHub · AI Studio · Firebase | 계정 3개 (Supabase · Vercel · Groq 는 6칸부터) |
 | 1 | 더 나은 바이브코딩을 위한 배경지식 | 개념 칸 | 시작하기 전의 판단 기준 |
 | 2 | 웹페이지 디자인 | Gemini Canvas · getdesign.md | 디자인이 입혀진 내 활동지 |
 | 3 | 재료 만들어 붙이기 | AI Studio · 이미지 생성 | 그림이 들어간 `assets` 폴더 |
 | 4 | 주소 만들기 | GitHub Pages · ai.studio | QR 찍으면 열리는 내 앱 |
 | 5 | 서버 체험 — 게임과 기록표 | AI Studio Build · Firebase | 링크만 공유하면 동시 접속 |
-| 6 | 서버 활용 — 날짜별 사진 캘린더 | Firestore | 하루 한 장, 규격 고정 |
-| 7 | 앱이 AI를 부르게 | AI Studio Build | 힌트 버튼, 키는 서버에만 |
+| 6 | 한 걸음 더 코딩 — 함께 쓰는 공용 캘린더 | 프롬프트 · Supabase | 입장코드로 같이 쓰는 달력 |
+| 7 | 앱이 AI를 부르게 | AI Studio Build · Vercel · Groq | 힌트 버튼, 키는 서버에만 |
 
 CLI·IDE 계열 도구(Claude Code·Antigravity·Cursor 등)는 설치가 필요해 연수장에서 쓸 수 없으므로 이름만 소개합니다.
 

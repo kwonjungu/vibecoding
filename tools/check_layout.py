@@ -237,6 +237,8 @@ def main():
     # L19 분량 상한
     CAPS = {'why': 320, 'how': 1300, 'check': 180, 'trouble': 650,
             'cards': 1000, 'checklist': 300}
+    # 칸별 예외. 4칸은 길이 넷이라 how 안내도 넷이다 (DESIGN.md §6.5)
+    CAPS_BY_RUNG = {(4, 'how'): 1800}
     PANE_CAP = 450
 
     def prose(x):
@@ -251,7 +253,7 @@ def main():
             e = marks[i+1].start() if i+1 < len(marks) else len(b)
             name = mk.group(1)
             size = len(prose(b[mk.start():e]))
-            cap = CAPS.get(name)
+            cap = CAPS_BY_RUNG.get((n, name), CAPS.get(name))
             if cap and size > cap:
                 over.append('rung-%d/%s %d>%d' % (n, name, size, cap))
     for pane in ('safety', 'glossary', 'limits'):

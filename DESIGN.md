@@ -52,7 +52,7 @@
 | 3 재료 | `--rung-3` | `#985908` | `#fbf1e2` | 앰버 |
 | 4 주소 만들기 | `--rung-4` | `#0a7281` | `#e6f2f3` | 틸 |
 | 5 서버 체험 | `--rung-5` | `#1151ff` | `#e8eeff` | 블루 |
-| 6 사진 캘린더 | `--rung-6` | `#3d3a8c` | `#ecebf7` | 인디고 |
+| 6 공용 캘린더 | `--rung-6` | `#3d3a8c` | `#ecebf7` | 인디고 |
 | 7 AI 부르기 | `--rung-7` | `#8a1c4b` | `#f8e9f0` | 플럼 |
 | 8 마치며 | `--rung-8` | `#39393b` | `#f5f5f5` | 무채. 사다리를 벗어나 밖을 보는 칸이라 색을 거둔다 |
 
@@ -122,7 +122,7 @@
 6  section.lecture#rung-3  재료 만들어 붙이기
 7  section.lecture#rung-4  주소 만들기
 8  section.lecture#rung-5  서버 체험
-9  section.lecture#rung-6  사진 캘린더
+9  section.lecture#rung-6  공용 캘린더
 10 section.lecture#rung-7  캘린더에 AI 붙이기
 11 section.lecture#rung-8  마치며
 12 section.safety          안전 한 장
@@ -194,7 +194,7 @@
 
 답을 바로 주지 않되 막힌 사람이 꺼내 볼 수 있도록 `<details class="hint">` 를 `how` 안에 둔다. `.trouble` 과 생김새는 같고 띠 색만 그 칸의 강조색을 쓴다.
 
-**예외 (L06)**: `rung-8`(마치며)은 `cards` + `checklist` 를 갖는다. 실습이 아니라 사다리를 마치고 밖을 보는 칸이다. `rung-1`(배경지식)은 실습이 없어 `cards`(핵심 카드 4개) + `checklist` 두 블록만 갖는다. `rung-0`(준비물)은 `cards`(계정 카드 3개) + `check`를 갖는다.
+**예외 (L06)**: `rung-8`(마치며)은 `cards` + `checklist` 를 갖는다. 실습이 아니라 사다리를 마치고 밖을 보는 칸이다. `rung-1`(배경지식)은 실습이 없어 `cards`(핵심 카드 4개) + `checklist` 두 블록만 갖는다. `rung-0`(준비물)은 `cards` + `check`를 갖는다. `cards` 는 카드 7개다. 앞 3개는 지금 만드는 계정(GitHub · AI Studio · Firebase), 다음 3개는 6~7칸에 가서 만드는 계정(Supabase · Vercel · Groq)으로 `.mix-highlight` 에 `나중에 · N칸` 을 적어 구분한다. 마지막은 게임 저장소 카드다.
 
 ---
 
@@ -211,7 +211,7 @@
 | `.trouble` | `<details>` + `<summary>`. 좌측 4px `--sale` 띠 |
 | `.btn` | pill(`--rounded-lg`). `.btn-primary`는 `--ink` 배경 / 흰 글씨, `.btn-secondary`는 테두리만 |
 | `.brand-mark` | 브랜드 로고 자리. `<figure>` + `<img>`. 높이만 40px(넓은 워드마크는 32px)로 맞추고 **비율은 원본 그대로** 둔다. 늘이거나 자르지 않는다. 로고는 `assets/logo/` 에 내려받아 보관하고 핫링크하지 않는다 |
-| `.is-centered` | `.brand-mark` 와 `.lecture-actions` 에 붙이는 변형. 그 덩어리를 가운데로 둔다. 로고와 바로 아래 버튼을 한 쌍으로 보여 줄 때 쓴다 |
+| `.is-centered` | `.brand-mark` 와 `.lecture-actions`, `.guide-shot` 에 붙이는 변형. 그 덩어리를 가운데로 둔다. 로고와 바로 아래 버튼을 한 쌍으로 보여 줄 때, 그리고 컨테이너보다 좁은 캡처가 왼쪽에만 붙어 기울어 보일 때 쓴다 |
 | `.trait-call` | 2칸에서 AI 기본값 여섯 가지를 한데 모아 보이는 자리. 페이지에서 **유일하게 가운데 정렬하는 글**이다. 비판하는 대상을 그 모습 그대로 보여 주는 것이라 예외로 둔다 |
 | `.video-embed` | 영상 자리. `<iframe>` 을 감싸 16 대 9 비율을 지킨다. `title` 속성으로 무엇인지 밝히고 `loading="lazy"` 를 붙인다. 자동 재생은 쓰지 않는다 |
 | `.guide-shot` | `<figure>`. 캡처 자리. 없을 땐 비워 두되 `figcaption`으로 "연수 전 촬영" 표시 |
@@ -241,7 +241,7 @@
 | 블록 | 상한 | 기준 |
 |---|---|---|
 | `why` | 320자 | 왜 필요한지만. 개념 재설명과 앞 칸 요약을 넣지 않는다. 문단 두 개면 넘는다 |
-| `how` | 1,300자 | 단계 문장은 남기고 그 사이 설명을 뺀다 |
+| `how` | 1,300자 (4칸만 1,800자) | 단계 문장은 남기고 그 사이 설명을 뺀다. 4칸은 길이 A~D 넷이라 안내도 넷이다 |
 | `check` | 180자 | 관찰 가능한 항목 세 줄 |
 | `trouble` | 650자 (항목당 130자) | 증상·원인·해결 각 한 문장 |
 | `cards` | 1,000자 | 카드마다 두 문장 |

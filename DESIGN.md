@@ -73,12 +73,14 @@
 
 | 단계 | 크기 / 줄간격 | 글꼴 | 쓰는 곳 |
 |---|---|---|---|
-| display | 96px / 1.08 | display | 히어로 `h1`. 한글은 라틴보다 줄간격이 더 필요하다. 1 아래로 내리면 글자가 물린다 |
+| display | 96px / 0.9 | display | 히어로 `h1`. Black Han Sans 는 글자통이 낮아 0.9 에서 물리지 않는다 |
 | rung-no | 120px / 0.95 | display | 칸 번호 |
-| h2 | 44px / 1.05 | display | 칸 제목 |
-| h3 | 20px / 1.3, 700 | ui | 블록 제목 |
-| lead | 19px / 1.65 | ui | 칸 도입 문단 |
-| body | 17px / 1.65 | ui | 본문. 전자칠판에서 읽히는 크기가 기준이다 |
+| h2 | 46px / 1.1 | display | 지도·꼬리 제목 |
+| lecture h2 | 60px / 1.04, 700, -0.01em | **ui** | 칸 제목. 여기만 디스플레이 글꼴을 벗는다 |
+| h3 | 24px / 1.2, 700 | ui | 블록 제목 |
+| lead | 22px / 1.6 | ui | 칸 도입 문단. `.lecture-copy` 안에서는 `max-width: 540px` |
+| body | 16px / 1.5 | ui | 페이지 기준값 |
+| detail body | 18px / 1.6 | ui | `.detail-block` 의 문단과 목록. **읽는 글은 기준값보다 한 단계 크다** |
 | key-lead | 20px / 1.5, 600 | ui | `.guide-key` 도입 문단. 본문보다 크고 굵다 |
 | key-text | 18px / 1.5 | ui | `.key-item` 설명. 전자칠판에서 읽히는 최소 크기 |
 | key-label | 14px, 700 | ui | 알약 배지. 강조색 바탕에 흰 글씨 |
@@ -86,7 +88,10 @@
 | figcaption | 17px / 1.6 | ui | 절차 캡처의 설명. 따라 하며 읽는 글이라 본문에 준한다 |
 | caption | 15px / 1.6 | ui | 각주·주의사항 |
 
-표 안 글자는 16px, 복붙 프롬프트는 15px 등폭이다. 599px 이하에서는 본문 16px, 표 15px, 프롬프트 14px로 한 단계씩 내린다.
+표 안 글자는 16px, 복붙 프롬프트는 15px 등폭이다. 599px 이하에서는 표 15px, 프롬프트 14px로 내린다.
+
+줄이는 단계는 두 곳뿐이다. `≤1023px` 에서 display 64px · lecture h2 40px · lead 18px,
+`≤599px` 에서 display 48px. 본문(16px)과 읽는 글(18px)은 어느 폭에서도 줄이지 않는다.
 
 ### 간격 · 라운드 · 레이아웃
 
@@ -94,7 +99,7 @@
 
 `--rounded-none 0` (카드·박스 기본값) · `--rounded-lg 30px` (버튼) · `--rounded-full` (원형 아이콘). **카드에 라운드를 쓰지 않는다.**
 
-`--content-max: 1280px` · `--gutter: 40px` (모바일 20px).
+`--content-max: 1440px` · `--gutter: 40px` (모바일 20px).
 
 **가로 정렬 (L18)**: 세 갈래로 나눈다.
 
@@ -107,7 +112,7 @@
 - **가운데 두는 것** — 위아래로 왼쪽 모서리를 맞출 상대가 없는 **독립 덩어리**. `margin-left: auto; margin-right: auto;` 를 넣는다. 대상: `.lecture-detail`, `.ladder-note`.
 - **왼쪽에 붙이는 것** — 제목 **바로 아래** 오는 리드 문단. 제목은 컨테이너 왼쪽 끝에서 시작하므로 리드만 가운데로 밀면 둘의 왼쪽 모서리가 어긋나 오히려 어색하다. 가운데 정렬을 넣지 않는다. 대상: `.hero .lead`(h1 아래), `.key-lead`(h3 아래), `.pane .lead`(h2 아래).
 
-페이지가 왼쪽으로 쏠려 보이는 문제는 문단을 밀어서가 아니라 `--content-max` 를 1280px 로 좁혀서 잡는다.
+페이지가 왼쪽으로 쏠려 보이는 문제는 문단을 밀어서가 아니라 리드에 `max-width` 를 걸어 잡는다.
 
 ---
 
@@ -203,7 +208,9 @@
 | 클래스 | 규격 |
 |---|---|
 | `.ladder-map` | 9칸 그리드. 데스크톱 3열 × 3행, 768px 이하 1열. 각 항목은 `번호 · 제목 · 도구 · 남는 것` 4줄, `href="#rung-N"` (**L08**) |
-| `.note-card` | 배경 `--soft-cloud`, 라운드 0, 그림자 없음, 패딩 `--sp-xl` |
+| `.lecture-detail` | 본문 판. 배경 `--soft-cloud`, 패딩 `--sp-section --gutter`, `max-width: 72em` 에 가운데 |
+| `.note-card` · `.guide-key` | **판 위에 뜨는 흰 카드.** 배경 `--canvas` + `--hairline-soft` 1px, 라운드 0, 그림자 없음, 패딩 `--sp-xl` |
+| `.mix-highlight` | 알약 배지. `--ink` 바탕에 흰 글씨, `--rounded-lg`, 패딩 8/18, 16px 700 |
 | `.guide-key` / `.key-grid` | 3열(768px 이하 1열). 각 `.key-item`은 `.key-label`(kicker) + `.key-text` |
 | `.prompt-box` | `--soft-cloud` 배경, 좌측 4px `--ink` 띠, `pre` 유지, 사용자가 드래그해 복사 |
 | `.prompt-copy` | 프롬프트 복사 버튼. 페이지 끝 `<script>` 가 `pre.prompt-box` 마다 위에 만들어 넣는다. 마크업에 손으로 적지 않는다. https 에서는 클립보드 API 를, `file://` 로 열었을 때는 대체 방법을 쓴다. 실패하면 직접 드래그하라고 알린다 |
@@ -229,6 +236,10 @@
 - `≤599px` — display 96 → 52px, rung-no 120 → 64px, h2 44 → 30px, `--gutter` 20px
 
 가로 스크롤은 어떤 폭에서도 생기지 않는다. 넓은 표는 `.table-scroll`로 감싸 **그 안에서만** 가로 스크롤한다.
+
+그러려면 표를 품은 조상에 `min-width: 0` 이 있어야 한다. grid·flex 항목의 기본값이 `auto` 라
+안쪽 표(`min-width: 560px`)가 칸을 밀어내 페이지가 통째로 옆으로 스크롤된다.
+`.note-card` · `.detail-block` · `.table-scroll` 이 그래서 `min-width: 0` 을 갖는다.
 
 ---
 

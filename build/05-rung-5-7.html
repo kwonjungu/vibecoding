@@ -348,6 +348,14 @@ anon 키는 공개되는 값이야. 그래서 테이블에 RLS를 켜야 해.
       <p>캘린더에 정리 어시스턴트를 붙입니다. 칸 하나에 생각나는 대로 적습니다. <em>0924 3 미팅</em> 처럼 짧게 적어도 되고 문장으로 적어도 됩니다. 어시스턴트가 날짜와 제목과 기록으로 갈라 캘린더에 넣을 모양으로 돌려줍니다. 메모를 옮겨 적는 일이 사라집니다.</p>
       <p>서버 함수 하나가 열쇠 두 개를 맡습니다. 하나는 AI를 부르는 열쇠, 하나는 우리 반 데이터를 다루는 열쇠입니다. 6칸에서는 브라우저가 직접 Supabase를 불러 공개되는 <code>anon</code> 키를 RLS로 막았습니다. 이제 서버가 부르니 서버 전용 키를 쓰고, 브라우저는 데이터에 직접 닿지 않습니다.</p>
 
+      <figure class="guide-shot is-centered">
+        <img src="assets/shot/rung7-assistant.png" alt="정리 어시스턴트 화면. 입력칸에 적은 한 문장이 아래에 날짜와 내용 세 줄로 갈라져 있고 줄마다 추가하기 단추가 붙어 있다" loading="lazy" />
+        <figcaption>완성 예시입니다. 적어 넣으면 날짜로 갈라 주고, 확인한 뒤 추가하기를 눌러야 들어갑니다.</figcaption>
+      </figure>
+      <div class="lecture-actions">
+        <a class="btn btn-secondary" href="https://a-iroom.vercel.app/calandar" target="_blank" rel="noopener">완성 예시 열기</a>
+      </div>
+
       <h3>지켜야 할 조건</h3>
       <ol>
         <li>열쇠는 모두 Vercel 환경변수에 넣습니다. 이름 앞에 <code>VITE_</code> 나 <code>NEXT_PUBLIC_</code> 을 붙이지 않습니다. 붙이면 브라우저 파일에 박힙니다.</li>

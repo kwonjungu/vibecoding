@@ -1,6 +1,7 @@
 # 미션: 공용 캘린더를 내 Supabase로 옮기기
 
-완성 예시: https://a-iroom.vercel.app/calandar
+완성 예시: https://class-calendar-psi.vercel.app/
+실습 저장소(포크해서 씁니다): https://github.com/kwonjungu/class-calendar
 입장코드 1111과 이름으로 들어가서 월 달력에 한 줄씩 적는 공용 캘린더입니다. 내가 적은 것만 30분 안에 지울 수 있습니다.
 
 이 미션의 목표는 같은 앱을 내 Supabase 프로젝트, 내 GitHub 저장소, 내 Vercel 배포로 옮기는 것입니다. 설치는 하지 않습니다. 브라우저만 씁니다.

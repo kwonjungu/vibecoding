@@ -32,7 +32,7 @@ HEAD = u'''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>바이브코딩 사다리 — 코딩 몰라도 앱을 만들 수 있을까요?</title>
+<title>바이브 코딩 업그레이드 프로젝트!</title>
 <meta name="description" content="브라우저만으로, 무료로, 쉬운 것부터 어려운 것까지. 초등 교사를 위한 바이브코딩 여덟 칸 실습 사다리." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -114,7 +114,7 @@
 ## 3. 페이지 골격 (순서 고정 — **L01**)
 
 ```
-1  section.hero            질문형 헤드라인
+1  section.hero            연수 제목 헤드라인
 2  section.ladder-map      9칸 지도 (탭 역할)
 3  section.lecture#rung-0  준비물 챙기기
 4  section.lecture#rung-1  배경지식

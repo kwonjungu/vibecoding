@@ -29,8 +29,8 @@
     <a class="rung-card" href="#rung-0">
       <span class="rung-card-no">00</span>
       <span class="rung-card-title">준비물 챙기기</span>
-      <span class="rung-card-tool">GitHub과 AI Studio</span>
-      <span class="rung-card-gain">계정 2개</span>
+      <span class="rung-card-tool">GitHub · AI Studio · Firebase</span>
+      <span class="rung-card-gain">지금 계정 3개</span>
     </a>
     <a class="rung-card" href="#rung-1">
       <span class="rung-card-no">01</span>
@@ -196,7 +196,7 @@
             <p class="key-text">앱이 사는 인터넷 주소입니다.</p>
           </div>
         </div>
-        <figure class="guide-shot">
+        <figure class="guide-shot is-centered">
           <img src="assets/shot/rung1-app-map.png" alt="앱의 구조를 그린 그림. 왼쪽에서 학생이 화면을 보고, 가운데 주문서를 통해, 오른쪽에서 선생님이 기록을 다루며, 위쪽 지구본에 앱 주소가 붙어 있다" loading="lazy" />
           <figcaption>비유를 벗기면 이렇게 부릅니다. 홀은 프론트, 주방은 백엔드, 주문서는 API, 건물은 호스팅입니다.</figcaption>
         </figure>
@@ -913,7 +913,7 @@ Folder: / (root)
         <img src="assets/shot/rung5-firebase-01-console.png" alt="Firebase 콘솔 홈 화면. 프로젝트 목록에 Default Gemini Project가 이미 있음">
         <figcaption>① Firebase 콘솔 홈입니다. Default Gemini Project가 이미 있으므로 새로 만들지 않습니다.</figcaption>
       </figure>
-      <figure class="guide-shot">
+      <figure class="guide-shot is-centered">
         <img src="assets/shot/rung5-firebase-02-menu-auth.png" alt="왼쪽 메뉴에서 제품 카테고리, 보안, Authentication을 차례로 선택하는 화면">
         <figcaption>② 왼쪽 메뉴에서 제품 카테고리, 보안, Authentication 순으로 들어갑니다.</figcaption>
       </figure>
@@ -1026,7 +1026,7 @@ Folder: / (root)
           <tbody>
             <tr><th scope="row">1 한 줄</th><td>무엇을 누구를 위해 만드는지</td><td>AI가 장르부터 혼자 고릅니다</td></tr>
             <tr><th scope="row">2 숫자</th><td>1111, 40자, 30분처럼 눈에 보이는 값</td><td>적당히 정하고 알려 주지 않습니다</td></tr>
-            <tr><th scope="row">3 하지 말 것</th><td>아무나 지우지 못한다, 이름을 받지 않는다</td><td>다 되게 만듭니다. 그게 가장 쉬운 답이라서 그렇습니다</td></tr>
+            <tr><th scope="row">3 하지 말 것</th><td>아무나 지우지 못한다, 로그인 화면은 만들지 않는다</td><td>다 되게 만듭니다. 그게 가장 쉬운 답이라서 그렇습니다</td></tr>
             <tr><th scope="row">4 확인 방법</th><td>무엇을 보면 됐다고 아는지</td><td>됐는지 안 됐는지 내가 판단하지 못합니다</td></tr>
           </tbody>
         </table>
@@ -1122,15 +1122,19 @@ Folder: / (root)
 
 anon 키는 공개되는 값이야. 그래서 테이블에 RLS를 켜야 해.
 읽기는 모두 허용하고, 지우기는 적은 지 30분 안일 때만 되도록 막는 SQL도 함께 줘.
+내 것만 지운다는 조건은 화면에서 단추를 숨기는 것으로 하고,
+서버 규칙은 시간만 본다는 점을 왜 그런지와 함께 한 줄로 알려 줘.
 그 SQL을 Supabase의 SQL Editor에 어떻게 붙여넣는지도 한 줄로 알려 줘.</pre>
     </div>
 
     <div class="detail-block" data-block="check">
       <h3>스스로 확인</h3>
       <ul class="check-list">
-        <li>입장코드를 틀리게 넣으면 달력이 열리지 않습니다.</li>
+        <li>입장코드를 틀리면 달력이 안 열립니다.</li>
         <li>휴대폰으로 열어도 컴퓨터에서 적은 줄이 보입니다.</li>
         <li>남이 적은 줄에는 지우기 단추가 없습니다.</li>
+        <li>30분이 지나면 내 줄에서도 단추가 사라집니다.</li>
+        <li>개인정보 안내가 화면에서 사라지지 않습니다.</li>
       </ul>
     </div>
 
@@ -1152,7 +1156,7 @@ anon 키는 공개되는 값이야. 그래서 테이블에 RLS를 켜야 해.
         <summary>남이 적은 줄이 지워집니다</summary>
         <p><strong>증상</strong> Supabase로 옮긴 뒤 아무나 남의 글을 지웁니다.</p>
         <p><strong>원인</strong> RLS를 켜지 않았습니다. anon 키는 공개되는 값이라 키만으로는 아무것도 막지 못합니다.</p>
-        <p><strong>해결</strong> 테이블에 RLS를 켜고 지우기 정책을 만듭니다.</p>
+        <p><strong>해결</strong> RLS를 켜고 30분 정책을 겁니다. 내 것만이라는 조건은 화면에서 걸고 서버는 시간만 봅니다.</p>
       </details>
       <details class="trouble">
         <summary>방학이 지나니 앱이 멈춰 있습니다</summary>
@@ -1489,7 +1493,7 @@ anon 키는 공개되는 값이야. 그래서 테이블에 RLS를 켜야 해.
       </div>
       <div class="key-item">
         <p class="key-label">개인정보</p>
-        <p class="key-text">학생 이름과 얼굴 사진은 공개 저장소에 올리지 않습니다. 회원가입 없이 학급 코드와 번호로 들어오게 하고 서버에는 번호와 별명, 점수만 남깁니다.</p>
+        <p class="key-text">학생 이름과 얼굴 사진은 공개 저장소에 올리지 않습니다. 회원가입 없이 학급 코드와 번호로 들어오게 하고 서버에는 별명처럼 지워도 되는 것만 남깁니다.</p>
       </div>
       <div class="key-item">
         <p class="key-label">저작권</p>
@@ -1643,7 +1647,7 @@ anon 키는 공개되는 값이야. 그래서 테이블에 RLS를 켜야 해.
         <tr>
           <th scope="row">Firebase Cloud Storage</th>
           <td>파일 업로드를 맡는 자리입니다. 2026년 2월 3일부터 버킷 생성에 결제 계정이 필요합니다.</td>
-          <td>이 페이지에서는 쓰지 않습니다. 6칸은 사진 대신 글 한 줄만 주고받습니다.</td>
+          <td>이 페이지에서는 쓰지 않습니다. 사진을 주고받는 칸이 없습니다.</td>
         </tr>
         <tr>
           <th scope="row">Supabase</th>

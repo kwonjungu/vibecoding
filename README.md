@@ -4,7 +4,7 @@
 
 배포 주소: `https://kwonjungu.github.io/vibecoding/`
 
-## 아홉 칸
+## 아홉 칸 (0~8)
 
 | 칸 | 제목 | 도구 | 끝나면 남는 것 |
 |---|---|---|---|
@@ -15,7 +15,8 @@
 | 4 | 주소 만들기 | GitHub Pages · ai.studio | QR 찍으면 열리는 내 앱 |
 | 5 | 서버 체험 — 게임과 기록표 | AI Studio Build · Firebase | 링크만 공유하면 동시 접속 |
 | 6 | 한 걸음 더 코딩 — 함께 쓰는 공용 캘린더 | 프롬프트 · Supabase | 입장코드로 같이 쓰는 달력 |
-| 7 | 앱이 AI를 부르게 | AI Studio Build · Vercel · Groq | 힌트 버튼, 키는 서버에만 |
+| 7 | 한 걸음 더 코딩 — 캘린더에 AI 붙이기 | AI Studio Build · Vercel · Groq | 정리 어시스턴트, 열쇠는 서버에만 |
+| 8 | 마치며 | 개념 칸 | 다음에 무엇을 할지 |
 
 CLI·IDE 계열 도구(Claude Code·Antigravity·Cursor 등)는 설치가 필요해 연수장에서 쓸 수 없으므로 이름만 소개합니다.
 
@@ -32,6 +33,7 @@ CLI·IDE 계열 도구(Claude Code·Antigravity·Cursor 등)는 설치가 필요
 | `tools/build_index.py` | 조각을 이어 붙여 `index.html` 생성 |
 | `tools/check_layout.py` | `DESIGN.md` 규칙 L01~L15 자동 검사 |
 | `tools/harness.html` | 360 · 768 · 1280px 동시 미리보기 |
+| `docs/mission-supabase.md` | 6칸 심화 — 공용 캘린더를 내 Supabase·GitHub·Vercel로 옮기는 미션 1~5 |
 | `docs/superpowers/specs/` | 내용 설계 문서 |
 
 ## 고치는 법
@@ -58,7 +60,8 @@ python -m http.server 8000
 `assets/shot/` 에 이미 들어 있는 것:
 
 - `rung3-assets-before.png` / `rung3-assets-after.png` — 같은 게임의 기본 이모지 상태와 생성 이미지 적용 상태
-- `rung6-firebase-01~04*.png` — Firebase 익명 로그인 활성화 4단계
+- `rung5-firebase-01~04*.png` — Firebase 익명 로그인 활성화 4단계
+- `rung1-example-board.png` · `rung4-drop-vercel.png` · `rung4-drop-netlify.png` · `rung6-calendar.png` · `rung7-board-example.png` — 예시 앱과 드롭 화면
 
 아직 비어 있는 자리는 `<figure class="guide-shot">` 로 표시해 두었습니다. 로그인해야 나오는 화면이라 연수 전에 직접 촬영해 채웁니다.
 
